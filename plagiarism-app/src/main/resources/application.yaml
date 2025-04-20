@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: plagiarism-app
+
+
+server:
+  port: 8124
