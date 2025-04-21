@@ -12,8 +12,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        String path1 = "data/s041396743.java";
-        String path2 = "data/p041396743.java";
+        String path1 = "plagiarism-core/src/main/data/java/s041396743.java";
+        String path2 = "plagiarism-core/src/main/data/java/p041396743.java";
         List<TokenInfo> Submission1Tokens = TokenCollector.collectTokensFromFile(path1);
         List<TokenInfo> Submission2Tokens = TokenCollector.collectTokensFromFile(path2);
 
