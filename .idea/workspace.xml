@@ -5,7 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="init">
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/another_task/s024120095.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/another_task/s686549426.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/p041396743.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s000803777.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s001736579.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s025562310.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s025924504.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s027745585.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s028835830.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s031342519.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s035799797.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s041396743.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/submission1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,9 +38,26 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "vys-leon"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/vitaliy-101/plagiarism.git",
+    "accountId": "ca89cfd2-8f08-46ae-9592-230bb2f399a7"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -39,37 +70,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.plagiarism-core [clean,compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.plagiarism-core [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.plagiarism-core [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.plagiarism-work [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.PlagiarismAppApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Vitaliy/IDEA/plagiarism-work/plagiarism-app/src/main/java/com/example/plagiarismapp&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Maven.plagiarism-core [clean,compile].executor": "Run",
+    "Maven.plagiarism-core [clean,install].executor": "Run",
+    "Maven.plagiarism-core [compile].executor": "Run",
+    "Maven.plagiarism-work [clean,install].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.PlagiarismAppApplication.executor": "Run",
+    "git-widget-placeholder": "fixantlr4",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-21",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/MyScripts/2nd_course_work/plagiarism/plagiarism-core/src/main/data/java",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Vitaliy\IDEA\plagiarism-work\plagiarism-app\src\main\java\com\example\plagiarismapp" />
@@ -102,6 +135,14 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -114,6 +155,7 @@
       <workItem from="1745067530780" duration="3396000" />
       <workItem from="1745145485340" duration="1357000" />
       <workItem from="1745146878310" duration="43000" />
+      <workItem from="1745235300148" duration="842000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -154,16 +196,5 @@
     </ignored-roots>
     <MESSAGE value="init" />
     <option name="LAST_COMMIT_MESSAGE" value="init" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java</url>
-          <line>12</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
