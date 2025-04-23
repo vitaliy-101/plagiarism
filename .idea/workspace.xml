@@ -4,22 +4,54 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/another_task/s024120095.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/another_task/s686549426.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/p041396743.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s000803777.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s001736579.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s025562310.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s025924504.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s027745585.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s028835830.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s031342519.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s035799797.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s041396743.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/submission1.java" afterDir="false" />
+    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="fix problem with paths">
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/s000165165.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/s001541052.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/s002114843.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/s003241101.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/s004292872.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/s004869462.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/go/s021334834.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/go/s480436221.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/go/s523449010.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/go/s775445896.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/go/s886522973.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/go/s912608100.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/python/s000173384.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/python/s001090749.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/python/s005114193.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/python/s012178904.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/python/s014514822.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/CppTokenCollector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/GoTokenCollector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/PythonTokenCollector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/cpp/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/cpp/src/main/antlr4/cpp14/CPP14Lexer.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/cpp/src/main/antlr4/cpp14/CPP14Parser.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/cpp/src/main/java/cpp14/grammar/CPP14ParserBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/go/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/go/src/main/antlr4/go/GoLexer.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/go/src/main/antlr4/go/GoParser.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/go/src/main/java/go/grammar/GoParserBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/antlr4/java8/Java8Lexer.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/antlr4/java8/Java8Parser.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/python3/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/python3/src/main/antlr4/python3_13/PythonLexer.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/python3/src/main/antlr4/python3_13/PythonParser.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/python3/src/main/java/python3/grammar/PythonLexerBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/java/Java8Lexer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/java/Java8Parser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/java/Java8ParserBaseListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/java/Java8ParserListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/JavaTokenCollector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,18 +78,21 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "vys-leon"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;vys-leon&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/vitaliy-101/plagiarism.git",
-    "accountId": "ca89cfd2-8f08-46ae-9592-230bb2f399a7"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/vitaliy-101/plagiarism.git&quot;,
+    &quot;accountId&quot;: &quot;ca89cfd2-8f08-46ae-9592-230bb2f399a7&quot;
   }
-}]]></component>
+}</component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="true" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -84,13 +119,16 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.PlagiarismAppApplication.executor": "Run",
-    "git-widget-placeholder": "fixantlr4",
+    "git-widget-placeholder": "addlanguages",
+    "go.import.settings.migrated": "true",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/MyScripts/2nd_course_work/plagiarism/plagiarism-core/src/main/data/java",
+    "last_opened_file_path": "D:/2-nd course work/test_ast",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -105,7 +143,17 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Vitaliy\IDEA\plagiarism-work\plagiarism-app\src\main\java\com\example\plagiarismapp" />
+      <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\java\go\grammar" />
+      <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\java" />
+      <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\antlr4" />
+      <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\cpp\src\main\java\cpp14\grammar" />
+      <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\cpp\src\main\java" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\antlr4\go" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="python3.grammar" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -156,6 +204,9 @@
       <workItem from="1745145485340" duration="1357000" />
       <workItem from="1745146878310" duration="43000" />
       <workItem from="1745235300148" duration="842000" />
+      <workItem from="1745404708977" duration="2433000" />
+      <workItem from="1745408974126" duration="10302000" />
+      <workItem from="1745420914697" duration="2230000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -196,5 +247,9 @@
     </ignored-roots>
     <MESSAGE value="init" />
     <option name="LAST_COMMIT_MESSAGE" value="init" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>false</integration-enabled>
+    <settings-migrated>true</settings-migrated>
   </component>
 </project>

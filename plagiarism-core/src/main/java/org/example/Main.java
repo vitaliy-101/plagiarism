@@ -5,17 +5,35 @@ package org.example;
 import org.example.gst.GreedyStringTiling;
 import org.example.gst.MatchVals;
 import org.example.gst.PlagResult;
-import org.example.token.TokenCollector;
-import org.example.token.TokenInfo;
+import org.example.token.*;
 
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        String path1 = "plagiarism-core/src/main/data/java/s041396743.java";
-        String path2 = "plagiarism-core/src/main/data/java/p041396743.java";
-        List<TokenInfo> Submission1Tokens = TokenCollector.collectTokensFromFile(path1);
-        List<TokenInfo> Submission2Tokens = TokenCollector.collectTokensFromFile(path2);
+        // Example for Java
+//        String path1 = "plagiarism-core/src/main/data/java/p041396743.java";
+//        String path2 = "plagiarism-core/src/main/data/java/s041396743.java";
+//        List<TokenInfo> Submission1Tokens = JavaTokenCollector.collectTokensFromFile(path1);
+//        List<TokenInfo> Submission2Tokens = JavaTokenCollector.collectTokensFromFile(path2);
+
+        // Example for Python
+        String path1 = "plagiarism-core/src/main/data/python/s001090749.py";
+        String path2 = "plagiarism-core/src/main/data/python/s000173384.py";
+        List<TokenInfo> Submission1Tokens = PythonTokenCollector.collectTokensFromFile(path1);
+        List<TokenInfo> Submission2Tokens = PythonTokenCollector.collectTokensFromFile(path2);
+
+        // Example for Cpp
+//        String path1 = "plagiarism-core/src/main/data/cpp/s000165165.cpp";
+//        String path2 = "plagiarism-core/src/main/data/cpp/s001541052.cpp";
+//        List<TokenInfo> Submission1Tokens = CppTokenCollector.collectTokensFromFile(path1);
+//        List<TokenInfo> Submission2Tokens = CppTokenCollector.collectTokensFromFile(path2);
+
+        // Example for Go
+//        String path1 = "plagiarism-core/src/main/data/go/s021334834.go";
+//        String path2 = "plagiarism-core/src/main/data/go/s480436221.go";
+//        List<TokenInfo> Submission1Tokens = GoTokenCollector.collectTokensFromFile(path1);
+//        List<TokenInfo> Submission2Tokens = GoTokenCollector.collectTokensFromFile(path2);
 
         StringBuilder submissionBuild1 = new StringBuilder();
         for (TokenInfo token : Submission1Tokens) {

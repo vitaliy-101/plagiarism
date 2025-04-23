@@ -13,6 +13,7 @@
     <modules>
         <module>plagiarism-core</module>
         <module>plagiarism-app</module>
+        <module>plagiarism-languages</module>
     </modules>
 
     <properties>

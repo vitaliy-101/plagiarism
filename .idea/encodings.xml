@@ -5,6 +5,16 @@
     <file url="file://$PROJECT_DIR$/plagiarism-app/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/plagiarism-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/plagiarism-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/plagiarism-languages/cpp/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/plagiarism-languages/cpp/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/plagiarism-languages/go/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/plagiarism-languages/go/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/plagiarism-languages/java8/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/plagiarism-languages/java8/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/plagiarism-languages/python3/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/plagiarism-languages/python3/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/plagiarism-languages/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/plagiarism-languages/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>

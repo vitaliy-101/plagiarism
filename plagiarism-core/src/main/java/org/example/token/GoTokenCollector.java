@@ -2,16 +2,15 @@ package org.example.token;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
-import org.example.java.Java8Lexer;
-import org.example.java.Java8Parser;
-import org.example.java.Java8ParserBaseListener;
+
+import go.grammar.*;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TokenCollector extends Java8ParserBaseListener {
+public class GoTokenCollector extends GoParserBaseListener {
     public List<TokenInfo> tokens = new ArrayList<>();
 
     @Override
@@ -23,22 +22,23 @@ public class TokenCollector extends Java8ParserBaseListener {
         int type = token.getType();
 
 
-        tokens.add(new TokenInfo(text, type, line, column));
+        tokens.add(new TokenInfo(text, type, line, column, TokenInfo.Language.GO));
     }
 
     public static List<TokenInfo> collectTokensFromFile(String filename) throws IOException {
         CharStream input = CharStreams.fromReader(new FileReader(filename));
 
-        Java8Lexer lexer = new Java8Lexer(input);
+        GoLexer lexer = new GoLexer(input);
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
-        Java8Parser parser = new Java8Parser(tokenStream);
-        ParseTree tree = parser.compilationUnit();
+        GoParser parser = new GoParser(tokenStream);
+        ParseTree tree = parser.sourceFile();
 
-        TokenCollector collector = new TokenCollector();
+        GoTokenCollector collector = new GoTokenCollector();
         ParseTreeWalker walker = new ParseTreeWalker();
         walker.walk(collector, tree);
 
         return collector.tokens;
     }
 }
+
