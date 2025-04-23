@@ -4,55 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="fix problem with paths">
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/s000165165.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/s001541052.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/s002114843.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/s003241101.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/s004292872.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/s004869462.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/go/s021334834.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/go/s480436221.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/go/s523449010.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/go/s775445896.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/go/s886522973.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/go/s912608100.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/python/s000173384.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/python/s001090749.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/python/s005114193.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/python/s012178904.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/python/s014514822.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/CppTokenCollector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/GoTokenCollector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/PythonTokenCollector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/cpp/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/cpp/src/main/antlr4/cpp14/CPP14Lexer.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/cpp/src/main/antlr4/cpp14/CPP14Parser.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/cpp/src/main/java/cpp14/grammar/CPP14ParserBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/go/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/go/src/main/antlr4/go/GoLexer.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/go/src/main/antlr4/go/GoParser.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/go/src/main/java/go/grammar/GoParserBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/antlr4/java8/Java8Lexer.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/antlr4/java8/Java8Parser.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/python3/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/python3/src/main/antlr4/python3_13/PythonLexer.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/python3/src/main/antlr4/python3_13/PythonParser.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/python3/src/main/java/python3/grammar/PythonLexerBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/java/Java8Lexer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/java/Java8Parser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/java/Java8ParserBaseListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/java/Java8ParserListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/JavaTokenCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="add support of languages&#10;- add python, c++, go" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -206,7 +158,7 @@
       <workItem from="1745235300148" duration="842000" />
       <workItem from="1745404708977" duration="2433000" />
       <workItem from="1745408974126" duration="10302000" />
-      <workItem from="1745420914697" duration="2230000" />
+      <workItem from="1745420914697" duration="2560000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -224,7 +176,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745146541460</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add support of languages&#10;- add python, c++, go">
+      <option name="closed" value="true" />
+      <created>1745424786348</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1745424786348</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add support of languages&#10;- add python, c++, go">
+      <option name="closed" value="true" />
+      <created>1745424928963</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1745424928963</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +214,8 @@
       <path value="$PROJECT_DIR$/plagiarism-app" />
     </ignored-roots>
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="add support of languages&#10;- add python, c++, go" />
+    <option name="LAST_COMMIT_MESSAGE" value="add support of languages&#10;- add python, c++, go" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
