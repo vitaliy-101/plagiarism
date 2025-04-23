@@ -1,0 +1,104 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"f0c35166-594c-4584-bd6b-8e7066e2498b\" name=\"Changes\" comment=\"init\">\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/another_task/s024120095.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/another_task/s686549426.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/p041396743.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/s000803777.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/s001736579.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/s025562310.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/s025924504.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/s027745585.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/s028835830.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/s031342519.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/s035799797.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/s041396743.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/data/java/submission1.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ComposerSettings\">\r\n    <execution />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"ROOT_SYNC\" value=\"SYNC\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\"><![CDATA[{\r\n  \"lastFilter\": {\r\n    \"state\": \"OPEN\",\r\n    \"assignee\": \"vys-leon\"\r\n  }\r\n}]]></component>\r\n  <component name=\"GithubPullRequestsUISettings\"><![CDATA[{\r\n  \"selectedUrlAndAccountId\": {\r\n    \"url\": \"https://github.com/vitaliy-101/plagiarism.git\",\r\n    \"accountId\": \"ca89cfd2-8f08-46ae-9592-230bb2f399a7\"\r\n  }\r\n}]]></component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2vwrjOyGpQ8ySgJ0C5Qlmp9SdZm\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.Main.executor\": \"Run\",\r\n    \"Maven.plagiarism-core [clean,compile].executor\": \"Run\",\r\n    \"Maven.plagiarism-core [clean,install].executor\": \"Run\",\r\n    \"Maven.plagiarism-core [compile].executor\": \"Run\",\r\n    \"Maven.plagiarism-work [clean,install].executor\": \"Run\",\r\n    \"RequestMappingsPanelOrder0\": \"0\",\r\n    \"RequestMappingsPanelOrder1\": \"1\",\r\n    \"RequestMappingsPanelWidth0\": \"75\",\r\n    \"RequestMappingsPanelWidth1\": \"75\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"Spring Boot.PlagiarismAppApplication.executor\": \"Run\",\r\n    \"git-widget-placeholder\": \"fixantlr4\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"jdk.selected.JAVA_MODULE\": \"openjdk-21\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"D:/MyScripts/2nd_course_work/plagiarism/plagiarism-core/src/main/data/java\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.0\",\r\n    \"settings.editor.selected.configurable\": \"project.propVCSSupport.DirectoryMappings\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"E:\\Vitaliy\\IDEA\\plagiarism-work\\plagiarism-app\\src\\main\\java\\com\\example\\plagiarismapp\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Application.Main\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"org.example.Main\" />\r\n      <module name=\"plagiarism-core\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"org.example.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"PlagiarismAppApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"plagiarism-app\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.example.plagiarismapp.PlagiarismAppApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"f0c35166-594c-4584-bd6b-8e7066e2498b\" name=\"Changes\" comment=\"\" />\r\n      <created>1745067113540</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1745067113540</updated>\r\n      <workItem from=\"1745067114628\" duration=\"395000\" />\r\n      <workItem from=\"1745067530780\" duration=\"3396000\" />\r\n      <workItem from=\"1745145485340\" duration=\"1357000\" />\r\n      <workItem from=\"1745146878310\" duration=\"43000\" />\r\n      <workItem from=\"1745235300148\" duration=\"842000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"init\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1745070237033</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1745070237033</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"init\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1745146541460</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1745146541460</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <ignored-roots>\r\n      <path value=\"$PROJECT_DIR$/plagiarism-app\" />\r\n    </ignored-roots>\r\n    <MESSAGE value=\"init\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"init\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision a7fe1bff94656cd2b49d377ccdc80b0414f7e370)
++++ b/.idea/workspace.xml	(date 1745236601883)
+@@ -4,22 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="init">
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/another_task/s024120095.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/another_task/s686549426.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/p041396743.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s000803777.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s001736579.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s025562310.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s025924504.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s027745585.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s028835830.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s031342519.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s035799797.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/s041396743.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/java/submission1.java" afterDir="false" />
++    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="fix problem with paths">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -56,6 +42,16 @@
+   "selectedUrlAndAccountId": {
+     "url": "https://github.com/vitaliy-101/plagiarism.git",
+     "accountId": "ca89cfd2-8f08-46ae-9592-230bb2f399a7"
++  },
++  "recentNewPullRequestHead": {
++    "server": {
++      "useHttp": false,
++      "host": "github.com",
++      "port": null,
++      "suffix": null
++    },
++    "owner": "vitaliy-101",
++    "repository": "plagiarism"
+   }
+ }]]></component>
+   <component name="MarkdownSettingsMigration">
+@@ -86,7 +82,7 @@
+     "RunOnceActivity.git.unshallow": "true",
+     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+     "Spring Boot.PlagiarismAppApplication.executor": "Run",
+-    "git-widget-placeholder": "fixantlr4",
++    "git-widget-placeholder": "#1 on fixantlr4",
+     "ignore.virus.scanning.warn.message": "true",
+     "jdk.selected.JAVA_MODULE": "openjdk-21",
+     "kotlin-language-version-configured": "true",
+@@ -105,6 +101,7 @@
+ }]]></component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
++      <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-core\src\main\data\java" />
+       <recent name="E:\Vitaliy\IDEA\plagiarism-work\plagiarism-app\src\main\java\com\example\plagiarismapp" />
+     </key>
+   </component>
+@@ -155,7 +152,7 @@
+       <workItem from="1745067530780" duration="3396000" />
+       <workItem from="1745145485340" duration="1357000" />
+       <workItem from="1745146878310" duration="43000" />
+-      <workItem from="1745235300148" duration="842000" />
++      <workItem from="1745235300148" duration="1284000" />
+     </task>
+     <task id="LOCAL-00001" summary="init">
+       <option name="closed" value="true" />
+@@ -173,7 +170,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1745146541460</updated>
+     </task>
+-    <option name="localTasksCounter" value="3" />
++    <task id="LOCAL-00003" summary="fix problem with paths">
++      <option name="closed" value="true" />
++      <created>1745236211099</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1745236211099</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -195,6 +200,7 @@
+       <path value="$PROJECT_DIR$/plagiarism-app" />
+     </ignored-roots>
+     <MESSAGE value="init" />
+-    <option name="LAST_COMMIT_MESSAGE" value="init" />
++    <MESSAGE value="fix problem with paths" />
++    <option name="LAST_COMMIT_MESSAGE" value="fix problem with paths" />
+   </component>
+ </project>
+\ No newline at end of file
