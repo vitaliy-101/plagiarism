@@ -1,4 +1,4 @@
-package com.example.plagiarismapp.dto;
+package com.example.content;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,4 +14,5 @@ public class RepositoryContent {
     private String repositoryName;
     private String owner;
     private List<FileContent> files;
+    private Language language;
 }

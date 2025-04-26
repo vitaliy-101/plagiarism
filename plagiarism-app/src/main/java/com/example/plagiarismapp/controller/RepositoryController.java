@@ -1,9 +1,8 @@
 package com.example.plagiarismapp.controller;
 
 
-import com.example.plagiarismapp.dto.RepositoryContent;
+import com.example.content.RepositoryContent;
 import com.example.plagiarismapp.dto.RepositoryRequest;
-import com.example.plagiarismapp.service.GitService;
 import com.example.plagiarismapp.service.RepositoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

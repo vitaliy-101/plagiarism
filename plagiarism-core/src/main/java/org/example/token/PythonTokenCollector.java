@@ -1,16 +1,16 @@
 package org.example.token;
 
+import com.example.content.Language;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+import org.example.token.strategy.TokenCollector;
 import python3.grammar.*;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PythonTokenCollector extends PythonParserBaseListener {
+public class PythonTokenCollector extends PythonParserBaseListener implements TokenCollector {
     public List<TokenInfo> tokens = new ArrayList<>();
 
     @Override
@@ -22,13 +22,12 @@ public class PythonTokenCollector extends PythonParserBaseListener {
         int type = token.getType();
 
 
-        tokens.add(new TokenInfo(text, type, line, column, TokenInfo.Language.PYTHON));
+        tokens.add(new TokenInfo(text, type, line, column, Language.PY));
     }
 
-    public static List<TokenInfo> collectTokensFromFile(String filename) throws IOException {
-        CharStream input = CharStreams.fromReader(new FileReader(filename));
-
-        PythonLexer lexer = new PythonLexer(input);
+    @Override
+    public List<TokenInfo> collectTokensFromFile(String fileContent) {
+        PythonLexer lexer = new PythonLexer(CharStreams.fromString(fileContent));
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
         PythonParser parser = new PythonParser(tokenStream);

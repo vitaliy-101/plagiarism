@@ -14,6 +14,7 @@
         <module>plagiarism-core</module>
         <module>plagiarism-app</module>
         <module>plagiarism-languages</module>
+        <module>devkit</module>
     </modules>
 
     <properties>

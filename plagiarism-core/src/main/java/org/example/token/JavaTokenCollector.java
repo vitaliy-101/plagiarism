@@ -1,16 +1,16 @@
 package org.example.token;
 
+import com.example.content.Language;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 import java8.grammar.*;
+import org.example.token.strategy.TokenCollector;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JavaTokenCollector extends Java8ParserBaseListener {
+public class JavaTokenCollector extends Java8ParserBaseListener implements TokenCollector {
     public List<TokenInfo> tokens = new ArrayList<>();
 
     @Override
@@ -22,13 +22,12 @@ public class JavaTokenCollector extends Java8ParserBaseListener {
         int type = token.getType();
 
 
-        tokens.add(new TokenInfo(text, type, line, column, TokenInfo.Language.JAVA));
+        tokens.add(new TokenInfo(text, type, line, column, Language.JAVA));
     }
 
-    public static List<TokenInfo> collectTokensFromFile(String filename) throws IOException {
-        CharStream input = CharStreams.fromReader(new FileReader(filename));
-
-        Java8Lexer lexer = new Java8Lexer(input);
+    @Override
+    public List<TokenInfo> collectTokensFromFile(String fileContent) {
+        Java8Lexer lexer = new Java8Lexer(CharStreams.fromString(fileContent));
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
         Java8Parser parser = new Java8Parser(tokenStream);

@@ -1,16 +1,16 @@
 package org.example.token;
 
+import com.example.content.Language;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 import cpp14.grammar.*;
+import org.example.token.strategy.TokenCollector;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CppTokenCollector extends CPP14ParserBaseListener {
+public class CppTokenCollector extends CPP14ParserBaseListener implements TokenCollector {
     public List<TokenInfo> tokens = new ArrayList<>();
 
     @Override
@@ -22,13 +22,12 @@ public class CppTokenCollector extends CPP14ParserBaseListener {
         int type = token.getType();
 
 
-        tokens.add(new TokenInfo(text, type, line, column, TokenInfo.Language.CPP));
+        tokens.add(new TokenInfo(text, type, line, column, Language.CPP));
     }
 
-    public static List<TokenInfo> collectTokensFromFile(String filename) throws IOException {
-        CharStream input = CharStreams.fromReader(new FileReader(filename));
-
-        CPP14Lexer lexer = new CPP14Lexer(input);
+    @Override
+    public List<TokenInfo> collectTokensFromFile(String fileContent) {
+        CPP14Lexer lexer = new CPP14Lexer(CharStreams.fromString(fileContent));
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
         CPP14Parser parser = new CPP14Parser(tokenStream);

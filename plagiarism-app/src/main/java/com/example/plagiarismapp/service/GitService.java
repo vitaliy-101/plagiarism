@@ -1,7 +1,8 @@
 package com.example.plagiarismapp.service;
 
-import com.example.plagiarismapp.dto.FileContent;
-import com.example.plagiarismapp.dto.RepositoryContent;
+import com.example.content.FileContent;
+import com.example.content.Language;
+import com.example.content.RepositoryContent;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.eclipse.jgit.api.Git;
@@ -19,7 +20,7 @@ import static com.example.plagiarismapp.utils.GitUtils.*;
 public class GitService {
     private static final String TEMP_DIR_PREFIX = "repo_";
 
-    public RepositoryContent downloadRepository(String url, String fileExtension) throws Exception {
+    public RepositoryContent downloadRepository(String url, Language language) throws Exception {
         // 1. Создаем временную директорию
         var tempDir = Files.createTempDirectory(TEMP_DIR_PREFIX);
 
@@ -34,13 +35,14 @@ public class GitService {
             git.close();
 
             // 4. Собираем все файлы с нужным расширением
-            List<FileContent> files = collectFiles(tempDir, fileExtension);
+            var files = collectFiles(tempDir, language);
 
             return new RepositoryContent(
                     url,
                     extractRepoName(url),
                     extractRepoOwner(url),
-                    files
+                    files,
+                    language
             );
         } finally {
             // 5. Удаляем временную директорию
@@ -48,10 +50,10 @@ public class GitService {
         }
     }
 
-    private List<FileContent> collectFiles(Path rootDir, String fileExtension) throws IOException {
+    private List<FileContent> collectFiles(Path rootDir, Language language) throws IOException {
         return Files.walk(rootDir)
                 .filter(Files::isRegularFile)
-                .filter(path -> path.toString().endsWith(fileExtension))
+                .filter(path -> path.toString().endsWith(language.getFileExtension()))
                 .map(path -> {
                     try {
                         return new FileContent(

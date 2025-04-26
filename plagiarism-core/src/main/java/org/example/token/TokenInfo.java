@@ -1,5 +1,6 @@
 package org.example.token;
 
+import com.example.content.Language;
 import cpp14.grammar.CPP14Parser;
 import java8.grammar.Java8Lexer;
 import python3.grammar.PythonLexer;
@@ -8,12 +9,6 @@ import go.grammar.GoLexer;
 
 public class TokenInfo {
 
-    public enum Language {
-        JAVA,
-        PYTHON,
-        CPP,
-        GO
-    }
 
     public final String text;
     public final int type;
@@ -35,7 +30,7 @@ public class TokenInfo {
                 if (isIdentifierJava(type)) return "id";
                 if (isLiteralJava(type)) return "lit";
                 break;
-            case PYTHON:
+            case PY:
                 if (isIdentifierPython(type)) return "id";
                 if (isLiteralPython(type)) return "lit";
                 break;

@@ -1,4 +1,4 @@
-package com.example.plagiarismapp.dto;
+package com.example.content;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
