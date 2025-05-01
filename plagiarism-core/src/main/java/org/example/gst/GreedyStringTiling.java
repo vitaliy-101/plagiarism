@@ -58,16 +58,16 @@ public class GreedyStringTiling {
         result.setSimilarity(similarity);
         result.setSuspectedPlagiarism(simResult.suspPlag);
 
-
-        System.out.println("Identifiers: "+result.getIdentifier().id1+":"+result.getIdentifier().id2);
-        System.out.println("Similarity: "+result.getSimilarity());
-        System.out.print("Plagiriasm tiles: ");
-        for(MatchVals tiles:result.getTiles()){
-            System.out.print("("+tiles.patternPostion+",");
-            System.out.print(tiles.textPosition+",");
-            System.out.print(tiles.length+")");
-        }
-        System.out.println("\nSuspected Plagirism: "+result.suspectedPlagiarism);
+//
+//        System.out.println("Identifiers: "+result.getIdentifier().id1+":"+result.getIdentifier().id2);
+//        System.out.println("Similarity: "+result.getSimilarity());
+//        System.out.print("Plagiriasm tiles: ");
+//        for(MatchVals tiles:result.getTiles()){
+//            System.out.print("("+tiles.patternPostion+",");
+//            System.out.print(tiles.textPosition+",");
+//            System.out.print(tiles.length+")");
+//        }
+//        System.out.println("\nSuspected Plagirism: "+result.suspectedPlagiarism);
 
         return result;
     }

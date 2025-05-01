@@ -10,3 +10,4 @@ public class PlagiarismFindRequest {
     private Language language;
 
 }
+
