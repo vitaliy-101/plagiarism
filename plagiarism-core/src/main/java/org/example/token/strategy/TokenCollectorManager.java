@@ -21,7 +21,7 @@ public class TokenCollectorManager {
         return TOKEN_COLLECTORS.get(language);
     }
 
-    public List<TokenInfo> collectTokensFromFile(Language language, String fileContent) {
-        return chooseCollector(language).collectTokensFromFile(fileContent);
+    public List<TokenInfo> collectTokensFromFile(Language language, String path) {
+        return chooseCollector(language).collectTokensFromFile(path);
     }
 }

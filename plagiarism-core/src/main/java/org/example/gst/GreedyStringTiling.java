@@ -45,7 +45,7 @@ public class GreedyStringTiling {
 
         // Compute Similarity
         SimVal simResult = SimilarityCalculator.calcSimilarity(
-                Arrays.asList(s1.split("[\\s+|\\W+]")), Arrays.asList(s2.split("\\s+|\\W+")),
+                Arrays.asList(s1.split("[\\s+]")), Arrays.asList(s2.split("[\\s+]")),
                 tiles, threshold);
         float similarity = simResult.similarity;
         if (similarity > 1)
@@ -68,6 +68,9 @@ public class GreedyStringTiling {
             System.out.print(tiles.length+")");
         }
         System.out.println("\nSuspected Plagirism: "+result.suspectedPlagiarism);
+
+        tiles = new ArrayList<MatchVals>();
+        matchList = new ArrayList<Queue<MatchVals>>();
 
         return result;
     }
@@ -103,8 +106,8 @@ public class GreedyStringTiling {
             initsearchSize = 20;
 
         int s = 0;
-        String[] PList = P.split("[\\s+|\\W+]");
-        String[] TList = T.split("[\\s+|\\W+]");
+        String[] PList = P.split("[\\s+]");
+        String[] TList = T.split("[\\s+]");
 
         s = initsearchSize;
         boolean stop = false;
@@ -317,7 +320,7 @@ public class GreedyStringTiling {
      * @return true or false (i.e., whether marked or unmarked)
      */
     private static boolean isUnmarked(String string) {
-        if (string.length() > 0 && string.charAt(0) != '*')
+        if (string.length() > 0 && string.charAt(0) != ' ')
             return true;
         else
             return false;
@@ -329,7 +332,7 @@ public class GreedyStringTiling {
 
     private static String markToken(String string) {
         StringBuilder sb = new StringBuilder();
-        sb.append("*");
+        sb.append(" ");
         sb.append(string);
         return sb.toString();
     }
