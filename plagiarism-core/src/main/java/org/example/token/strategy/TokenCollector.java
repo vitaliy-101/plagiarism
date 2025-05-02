@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface TokenCollector {
 
-    List<TokenInfo> collectTokensFromFile(String fileContent);
+    List<TokenInfo> collectTokensFromFile(String path);
 
 }
