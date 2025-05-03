@@ -63,18 +63,23 @@ public class CoreService {
         List<TokenInfo> tokens1 = new ArrayList<>(tokenCollectorManager.collectTokensFromFile(language1, file1.getContent()));
         List<TokenInfo> tokens2 = new ArrayList<>(tokenCollectorManager.collectTokensFromFile(language2, file2.getContent()));
 
-        String submission1 = tokensToString(tokens1);
-        String submission2 = tokensToString(tokens2);
+        String[] submission1 = getTokenNames(tokens1);
+        String[] submission2 = getTokenNames(tokens2);
 
         System.out.println("BEFORE GREEDY: " + file1.getFilename() + "; " + file2.getFilename());
         try {
-            PlagResult res = GreedyStringTiling.run(submission1, submission2, 9, 0.8f);
+            GreedyStringTiling greedyStringTiling = new GreedyStringTiling();
+            PlagResult res = greedyStringTiling.run(submission1, submission2, 9, 0.8f);
             result.setSimilarity((double) Math.round(res.getSimilarity()));
             result.setSimilarityParts(res.getTiles().stream().map(t -> {
                 SimilarityPart part = new SimilarityPart();
-                part.setPositionInFirstFile((long) t.patternPostion);
-                part.setLength((long) t.length);
-                part.setPositionInSecondFile((long) t.textPosition);
+                part.setPositionInFirstFile((long) tokens1.get(t.patternPostion).line);
+                int line1p = tokens1.get(t.patternPostion).line;
+                int line2p = tokens1.get(t.patternPostion + t.length - 1).line;
+                int line1t = tokens2.get(t.textPosition).line;
+                int line2t = tokens2.get(t.textPosition + t.length - 1).line;
+                part.setLength((long) Math.max(line2p - line1p + 1, line2t - line1t + 1));
+                part.setPositionInSecondFile((long) tokens2.get(t.textPosition).line);
                 return part;
             }).toList());
         } catch (Exception e) {
@@ -86,22 +91,14 @@ public class CoreService {
         return result;
     }
 
-    private String tokensToString(List<TokenInfo> tokens) {
-        StringBuilder sb = new StringBuilder();
-        // Создаем защитную копию списка для итерации
-        List<TokenInfo> tokensCopy = new ArrayList<>(tokens);
-        for (TokenInfo token : tokensCopy) {
-            if (token != null) {
-                if (token.type != -1) {
-                    sb.append(token.normalizedText);
-                    sb.append(' ');
-                } else {
-                    sb.append(' ');
-                }
-            } else {
-                sb.append(' ');
-            }
+    private String[] getTokenNames(List<TokenInfo> tokens) {
+        String[] tokenNames = new String[tokens.size()];
+        for (int i = 0; i < tokens.size(); i++) {
+            if (tokens.get(i) != null && tokens.get(i).type != -1)
+                tokenNames[i] = tokens.get(i).normalizedText;
+            else
+                tokenNames[i] = "?";
         }
-        return sb.toString();
+        return tokenNames;
     }
 }

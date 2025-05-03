@@ -1,12 +1,14 @@
 package org.example.gst;
 
 
+import org.example.token.TokenInfo;
+
 import java.util.*;
 
 public class GreedyStringTiling {
 
-    public static ArrayList<MatchVals> tiles = new ArrayList<MatchVals>();
-    public static ArrayList<Queue<MatchVals>> matchList = new ArrayList<Queue<MatchVals>>();
+    public ArrayList<MatchVals> tiles = new ArrayList<MatchVals>();
+    public ArrayList<Queue<MatchVals>> matchList = new ArrayList<Queue<MatchVals>>();
 
     /**
      * This method runs a comparison on the two given strings s1 and s2
@@ -23,17 +25,14 @@ public class GreedyStringTiling {
      * @param threshold
      * @return
      */
-    public static PlagResult run(String s1, String s2, int mML, float threshold) {
+    public PlagResult run(String[] s1, String[] s2, int mML, float threshold) {
         if (mML < 1)
             System.err
                     .println("OutOfRangeError: minimum Matching Length mML needs to be greater than 0");
         if (!((0 <= threshold) && (threshold <= 1)))
             System.err
                     .println("OutOfRangeError: treshold t needs to be 0<=t<=1");
-        if (s1.isEmpty() || s2.isEmpty())
-            System.err
-                    .println("NoValidArgumentError: input must be of type string not None");
-        if (s1.equals("") || s2.equals(""))
+        if (s1.length == 0 || s2.length == 0)
             System.err
                     .println("NoValidArgumentError: input must be of type string not None");
 
@@ -42,7 +41,7 @@ public class GreedyStringTiling {
 
         // Compute Similarity
         SimVal simResult = SimilarityCalculator.calcSimilarity(
-                Arrays.asList(s1.split("[\\s+]")), Arrays.asList(s2.split("[\\s+]")),
+                Arrays.asList(s1), Arrays.asList(s2),
                 tiles, threshold);
         float similarity = simResult.similarity;
         if (similarity > 1)
@@ -50,7 +49,7 @@ public class GreedyStringTiling {
 
         // Create Plagiarism result and set attributes
         PlagResult result = new PlagResult(0, 0);
-        result.setIdentifier(createKRHashValue(s1), createKRHashValue(s2));
+        result.setIdentifier(createKRHashValue(ArrayToString(s1)), createKRHashValue(ArrayToString(s2)));
         result.setTiles(tiles);
         result.setSimilarity(similarity);
         result.setSuspectedPlagiarism(simResult.suspPlag);
@@ -94,7 +93,7 @@ public class GreedyStringTiling {
      *            search size
      * @return tiles
      */
-    public static ArrayList<MatchVals> RKR_GST(String P, String T,
+    public ArrayList<MatchVals> RKR_GST(String[] PList, String[] TList,
                                                int minimalMatchingLength, int initsearchSize) {
         if (minimalMatchingLength < 1)
             minimalMatchingLength = 3;
@@ -103,8 +102,6 @@ public class GreedyStringTiling {
             initsearchSize = 20;
 
         int s = 0;
-        String[] PList = P.split("[\\s+]");
-        String[] TList = T.split("[\\s+]");
 
         s = initsearchSize;
         boolean stop = false;
@@ -140,7 +137,7 @@ public class GreedyStringTiling {
      * @param T
      * @return Longest maximum match
      */
-    public static int scanpattern(int s, String[] P, String[] T) {
+    public int scanpattern(int s, String[] P, String[] T) {
 
         int longestMaxMatch = 0;
         Queue<MatchVals> queue = new LinkedList<MatchVals>();
@@ -278,7 +275,7 @@ public class GreedyStringTiling {
         return longestMaxMatch;
     }
 
-    private static void markStrings(int s, String[] P, String[] T) {
+    private void markStrings(int s, String[] P, String[] T) {
         // Создаем копию matchList, чтобы избежать ConcurrentModificationException
         List<Queue<MatchVals>> matchListCopy = new ArrayList<>(matchList);
         for (Queue<MatchVals> queue : matchListCopy) {
@@ -308,7 +305,7 @@ public class GreedyStringTiling {
      * @return hash value for any given string
      */
 
-    private static int createKRHashValue(String substring) {
+    private int createKRHashValue(String substring) {
         int hashValue = 0;
         for (int i = 0; i < substring.length(); i++)
             hashValue = ((hashValue << 1) + (int) substring.charAt(i));
@@ -321,18 +318,18 @@ public class GreedyStringTiling {
      * @param string
      * @return true or false (i.e., whether marked or unmarked)
      */
-    private static boolean isUnmarked(String string) {
+    private boolean isUnmarked(String string) {
         if (string.length() > 0 && string.charAt(0) != ' ')
             return true;
         else
             return false;
     }
 
-    private static boolean isMarked(String string) {
+    private boolean isMarked(String string) {
         return (!isUnmarked(string));
     }
 
-    private static String markToken(String string) {
+    private String markToken(String string) {
         StringBuilder sb = new StringBuilder();
         sb.append(" ");
         sb.append(string);
@@ -355,7 +352,7 @@ public class GreedyStringTiling {
      * @param tiles2
      * @return true or false
      */
-    private static boolean isOccluded(MatchVals match, ArrayList<MatchVals> tiles) {
+    private boolean isOccluded(MatchVals match, ArrayList<MatchVals> tiles) {
         if(tiles.equals(null) || tiles == null || tiles.size() == 0)
             return false;
         for (MatchVals matches : tiles) {
@@ -380,7 +377,7 @@ public class GreedyStringTiling {
      * @param p2
      * @return distance to next tile
      */
-    private static Object distToNextTile(int pos, String[] stringList) {
+    private Object distToNextTile(int pos, String[] stringList) {
         if (pos == stringList.length)
             return null;
         int dist = 0;
@@ -406,7 +403,7 @@ public class GreedyStringTiling {
      * @param stringList
      * @return the position to jump to the next unmarked token after tile
      */
-    private static Object jumpToNextUnmarkedTokenAfterTile(int pos, String[] stringList) {
+    private Object jumpToNextUnmarkedTokenAfterTile(int pos, String[] stringList) {
         Object dist = distToNextTile(pos, stringList);
         if(dist instanceof Integer)
             pos = pos+ (int)dist;
@@ -419,7 +416,15 @@ public class GreedyStringTiling {
         return pos+1;
     }
 
-    public static void main(String s[]){
-        run("with Hash table entries Hash table entries has Arun name is here, Arun name is here with Hash table entries Arun how is arun","Hash table entries has Arun name is here, Arun name is here with Hash table entries Arun how is arun Arun name is here with Hash table entries",2,(float)0.5);
+//    public void main(String s[]){
+//        run("with Hash table entries Hash table entries has Arun name is here, Arun name is here with Hash table entries Arun how is arun","Hash table entries has Arun name is here, Arun name is here with Hash table entries Arun how is arun Arun name is here with Hash table entries",2,(float)0.5);
+//    }
+
+    private String ArrayToString(String[] array) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < array.length; i++) {
+            sb.append(array[i]);
+        }
+        return sb.toString();
     }
 }

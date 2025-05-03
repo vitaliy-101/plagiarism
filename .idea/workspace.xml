@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="поправил баг">
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/SilentErrorListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/GreedyStringTiling.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/GreedyStringTiling.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/service/CoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/service/CoreService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/CppTokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/CppTokenCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/GoTokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/GoTokenCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/JavaTokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/JavaTokenCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/PythonTokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/PythonTokenCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenInfo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
