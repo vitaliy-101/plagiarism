@@ -28,8 +28,8 @@ public class GoTokenCollector extends GoParserBaseListener implements TokenColle
     }
 
     @Override
-    public List<TokenInfo> collectTokensFromFile(String fileContent) {
-        GoLexer lexer = new GoLexer(CharStreams.fromString(fileContent));
+    public List<TokenInfo> collectTokensFromFile(String path) {
+        GoLexer lexer = new GoLexer(CharStreams.fromString(path));
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
         GoParser parser = new GoParser(tokenStream);

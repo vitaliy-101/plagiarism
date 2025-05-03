@@ -1,10 +1,7 @@
 package org.example.gst;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class GreedyStringTiling {
 
@@ -282,9 +279,13 @@ public class GreedyStringTiling {
     }
 
     private static void markStrings(int s, String[] P, String[] T) {
-        for(Queue<MatchVals> queue:matchList){
-            while (!queue.isEmpty()) {
-                MatchVals match = queue.poll();
+        // Создаем копию matchList, чтобы избежать ConcurrentModificationException
+        List<Queue<MatchVals>> matchListCopy = new ArrayList<>(matchList);
+        for (Queue<MatchVals> queue : matchListCopy) {
+            // Создаем копию очереди, чтобы безопасно модифицировать
+            Queue<MatchVals> queueCopy = new LinkedList<>(queue);
+            while (!queueCopy.isEmpty()) {
+                MatchVals match = queueCopy.poll();
                 if (!isOccluded(match, tiles)) {
                     for (int j = 0; j < match.length; j++) {
                         P[match.patternPostion + j] = markToken(P[match.patternPostion + j]);
@@ -294,8 +295,9 @@ public class GreedyStringTiling {
                 }
             }
         }
-        matchList = new ArrayList<Queue<MatchVals>>();
+        matchList.clear(); // очищаем оригинальный список после обработки
     }
+
 
     /**
      * Creates a Karp-Rabin Hash Value for the given substring and returns it.

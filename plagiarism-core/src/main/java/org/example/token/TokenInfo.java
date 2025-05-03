@@ -17,11 +17,12 @@ public class TokenInfo {
     public final String normalizedText;
 
     public TokenInfo(String text, int type, int line, int column, Language lang) {
+        // Если type равен -1 (неизвестный тип), устанавливаем тип по умолчанию, например, 0
         this.text = text;
-        this.type = type;
+        this.type = (type == -1) ? 0 : type; // Устанавливаем дефолтный тип, если тип токена недействителен
         this.line = line;
         this.column = column;
-        this.normalizedText = normalize(lang, type, text);
+        this.normalizedText = normalize(lang, this.type, text);
     }
 
     public String normalize(Language lang, int type, String text) {

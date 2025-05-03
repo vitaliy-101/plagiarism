@@ -28,8 +28,8 @@ public class PythonTokenCollector extends PythonParserBaseListener implements To
     }
 
     @Override
-    public List<TokenInfo> collectTokensFromFile(String fileContent) {
-        PythonLexer lexer = new PythonLexer(CharStreams.fromString(fileContent));
+    public List<TokenInfo> collectTokensFromFile(String path) {
+        PythonLexer lexer = new PythonLexer(CharStreams.fromString(path));
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
         PythonParser parser = new PythonParser(tokenStream);
