@@ -31,25 +31,18 @@ public class CppTokenCollector extends CPP14ParserBaseListener implements TokenC
     }
 
     @Override
-    public List<TokenInfo> collectTokensFromFile(String path) {
-        try {
-            CPP14Lexer lexer = new CPP14Lexer(CharStreams.fromPath(Paths.get(path)));
-            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+    public List<TokenInfo> collectTokensFromFile(String fileContent) {
+        CPP14Lexer lexer = new CPP14Lexer(CharStreams.fromString(fileContent));
+        CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
-            CPP14Parser parser = new CPP14Parser(tokenStream);
-            ParseTree tree = parser.translationUnit();
+        CPP14Parser parser = new CPP14Parser(tokenStream);
+        ParseTree tree = parser.translationUnit();
 
-            CppTokenCollector collector = new CppTokenCollector();
-            ParseTreeWalker walker = new ParseTreeWalker();
-            walker.walk(collector, tree);
+        CppTokenCollector collector = new CppTokenCollector();
+        ParseTreeWalker walker = new ParseTreeWalker();
+        walker.walk(collector, tree);
 
-            return collector.tokens;
-        }
-        catch (IOException e)
-        {
-            System.err.println(e.getMessage());
-        }
-        return null;
+        return collector.tokens;
     }
 }
 

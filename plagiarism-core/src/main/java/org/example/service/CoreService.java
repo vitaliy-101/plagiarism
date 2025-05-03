@@ -69,15 +69,9 @@ public class CoreService {
         String submission1 = tokensToString(tokens1);
         String submission2 = tokensToString(tokens2);
 
-
-        if (submission1.length() > submission2.length()) {
-            String temp = submission1;
-            submission1 = submission2;
-            submission2 = temp;
-        }
         System.out.println("BEFORE GREEDY: " + file1.getFilename() + "; " + file2.getFilename());
         try {
-            PlagResult res = GreedyStringTiling.run(submission1, submission2, 1, 0.8f);
+            PlagResult res = GreedyStringTiling.run(submission1, submission2, 9, 0.8f);
             result.setSimilarity((double) Math.round(res.getSimilarity()));
             result.setSimilarityParts(res.getTiles().stream().map(t -> {
                 SimilarityPart part = new SimilarityPart();
@@ -97,7 +91,8 @@ public class CoreService {
     private String tokensToString(List<TokenInfo> tokens) {
         StringBuilder sb = new StringBuilder();
         for (TokenInfo token : tokens) {
-            sb.append((char) token.type);
+            sb.append(token.normalizedText);
+            sb.append(" ");
         }
         return sb.toString();
     }

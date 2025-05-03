@@ -2,6 +2,8 @@ package org.example;
 
 
 
+import com.example.content.FileContent;
+import org.antlr.v4.runtime.CharStreams;
 import org.example.gst.GreedyStringTiling;
 import org.example.gst.MatchVals;
 import org.example.gst.PlagResult;
@@ -28,12 +30,13 @@ public class Main {
 //        List<TokenInfo> Submission2Tokens = tokenCollectorManager.collectTokensFromFile(Language.PY, path2);
 
         // Example for Cpp
-        String path1 = "plagiarism-core/src/main/data/cpp/s003241101.cpp";
-        String path2 = "plagiarism-core/src/main/data/cpp/s001541052.cpp";
-//        String path3 = "plagiarism-core/src/main/data/cpp/p001541052.cpp";
+//        String path1 = "plagiarism-core/src/main/data/cpp/s003241101.cpp";
+//        String path2 = "plagiarism-core/src/main/data/cpp/s001541052.cpp";
+        String path1 = "plagiarism-core/src/main/data/cpp/s004292872.cpp";
+        String path2 = "plagiarism-core/src/main/data/cpp/s000165165.cpp";
         TokenCollectorManager tokenCollectorManager = new TokenCollectorManager();
-        List<TokenInfo> Submission1Tokens = tokenCollectorManager.collectTokensFromFile(Language.CPP, path1);
-        List<TokenInfo> Submission2Tokens = tokenCollectorManager.collectTokensFromFile(Language.CPP, path2);
+        List<TokenInfo> Submission1Tokens = tokenCollectorManager.collectTokensFromFile(Language.CPP, CharStreams.fromFileName(path1).toString());
+        List<TokenInfo> Submission2Tokens = tokenCollectorManager.collectTokensFromFile(Language.CPP, CharStreams.fromFileName(path2).toString());
 
         // Example for Go
 //        String path1 = "plagiarism-core/src/main/data/go/s021334834.go";
@@ -56,19 +59,19 @@ public class Main {
         }
         String submission2 = submissionBuild2.toString();
 
-        if (Submission1Tokens.size() > Submission2Tokens.size()) {
-            String temp = submission1;
-            submission1 = submission2;
-            submission2 = temp;
-
-            temp = path1;
-            path1 = path2;
-            path2 = temp;
-
-            List<TokenInfo> temp1 = Submission1Tokens;
-            Submission1Tokens = Submission2Tokens;
-            Submission2Tokens = temp1;
-        }
+//        if (Submission1Tokens.size() > Submission2Tokens.size()) {
+//            String temp = submission1;
+//            submission1 = submission2;
+//            submission2 = temp;
+//
+//            temp = path1;
+//            path1 = path2;
+//            path2 = temp;
+//
+//            List<TokenInfo> temp1 = Submission1Tokens;
+//            Submission1Tokens = Submission2Tokens;
+//            Submission2Tokens = temp1;
+//        }
         // submission1 - pattern, submission2 - text
 
         PlagResult res = GreedyStringTiling.run(submission1, submission2, 9, 0.8f);

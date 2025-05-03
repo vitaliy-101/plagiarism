@@ -28,24 +28,17 @@ public class JavaTokenCollector extends Java8ParserBaseListener implements Token
     }
 
     @Override
-    public List<TokenInfo> collectTokensFromFile(String path) {
-        try{
-            Java8Lexer lexer = new Java8Lexer(CharStreams.fromPath(Paths.get(path)));
-            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+    public List<TokenInfo> collectTokensFromFile(String fileContent) {
+        Java8Lexer lexer = new Java8Lexer(CharStreams.fromString(fileContent));
+        CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
-            Java8Parser parser = new Java8Parser(tokenStream);
-            ParseTree tree = parser.compilationUnit();
+        Java8Parser parser = new Java8Parser(tokenStream);
+        ParseTree tree = parser.compilationUnit();
 
-            JavaTokenCollector collector = new JavaTokenCollector();
-            ParseTreeWalker walker = new ParseTreeWalker();
-            walker.walk(collector, tree);
+        JavaTokenCollector collector = new JavaTokenCollector();
+        ParseTreeWalker walker = new ParseTreeWalker();
+        walker.walk(collector, tree);
 
-            return collector.tokens;
-        }
-        catch (IOException e)
-        {
-            System.err.println(e.getMessage());
-        }
-        return null;
+        return collector.tokens;
     }
 }
