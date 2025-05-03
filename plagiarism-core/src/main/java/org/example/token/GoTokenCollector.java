@@ -29,24 +29,17 @@ public class GoTokenCollector extends GoParserBaseListener implements TokenColle
 
     @Override
     public List<TokenInfo> collectTokensFromFile(String path) {
-        try {
-            GoLexer lexer = new GoLexer(CharStreams.fromPath(Paths.get(path)));
-            CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+        GoLexer lexer = new GoLexer(CharStreams.fromString(path));
+        CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
-            GoParser parser = new GoParser(tokenStream);
-            ParseTree tree = parser.sourceFile();
+        GoParser parser = new GoParser(tokenStream);
+        ParseTree tree = parser.sourceFile();
 
-            GoTokenCollector collector = new GoTokenCollector();
-            ParseTreeWalker walker = new ParseTreeWalker();
-            walker.walk(collector, tree);
+        GoTokenCollector collector = new GoTokenCollector();
+        ParseTreeWalker walker = new ParseTreeWalker();
+        walker.walk(collector, tree);
 
-            return collector.tokens;
-        }
-        catch (IOException e)
-        {
-            System.err.println(e.getMessage());
-        }
-        return null;
+        return collector.tokens;
     }
 }
 

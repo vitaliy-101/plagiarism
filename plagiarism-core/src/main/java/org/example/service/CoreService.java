@@ -1,18 +1,17 @@
 package org.example.service;
 
 import com.example.content.*;
-import lombok.extern.slf4j.Slf4j;
 import org.example.gst.GreedyStringTiling;
 import org.example.gst.PlagResult;
 import org.example.token.TokenInfo;
 import org.example.token.strategy.TokenCollectorManager;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.publisher.SinkOneSerialized;
 import reactor.core.scheduler.Schedulers;
 import reactor.util.function.Tuples;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,7 +21,6 @@ public class CoreService {
     public CoreService(TokenCollectorManager tokenCollectorManager) {
         this.tokenCollectorManager = tokenCollectorManager;
     }
-
 
     public Mono<CompareTwoRepositoryDto> compareRepositoriesReactive(RepositoryContent firstRepository, RepositoryContent secondRepository) {
         CompareTwoRepositoryDto compareResult = new CompareTwoRepositoryDto();
@@ -35,9 +33,7 @@ public class CoreService {
         return firstFiles
                 .flatMap(file1 -> secondFiles
                                 .map(file2 -> Tuples.of(file1, file2)),
-                        // Ограничиваем параллелизм
                         Runtime.getRuntime().availableProcessors())
-                // Параллельная обработка сравнений
                 .parallel()
                 .runOn(Schedulers.boundedElastic())
                 .flatMap(tuple -> Mono.fromCallable(() ->
@@ -62,19 +58,20 @@ public class CoreService {
         result.setFullFilenameFirst(file1.getFullFilename());
         result.setFullFilenameSecond(file2.getFullFilename());
         System.out.println("START COMPARE: " + file1.getFilename() + "; " + file2.getFilename());
-        List<TokenInfo> tokens1 = tokenCollectorManager.collectTokensFromFile(language1, file1.getContent());
-        List<TokenInfo> tokens2 = tokenCollectorManager.collectTokensFromFile(language2, file2.getContent());
 
+        // Создаем защитную копию списка токенов
+        List<TokenInfo> tokens1 = new ArrayList<>(tokenCollectorManager.collectTokensFromFile(language1, file1.getContent()));
+        List<TokenInfo> tokens2 = new ArrayList<>(tokenCollectorManager.collectTokensFromFile(language2, file2.getContent()));
 
         String submission1 = tokensToString(tokens1);
         String submission2 = tokensToString(tokens2);
-
 
         if (submission1.length() > submission2.length()) {
             String temp = submission1;
             submission1 = submission2;
             submission2 = temp;
         }
+
         System.out.println("BEFORE GREEDY: " + file1.getFilename() + "; " + file2.getFilename());
         try {
             PlagResult res = GreedyStringTiling.run(submission1, submission2, 1, 0.8f);
@@ -88,6 +85,7 @@ public class CoreService {
             }).toList());
         } catch (Exception e) {
             System.out.println("EXCEPTION!!!");
+            e.printStackTrace(); // Добавим вывод стека для отладки
         }
         System.out.println("SUCCESS COMPARE 2 FILES");
         System.out.println("END NAMES: " + file1.getFilename() + "; " + file2.getFilename());
@@ -96,10 +94,19 @@ public class CoreService {
 
     private String tokensToString(List<TokenInfo> tokens) {
         StringBuilder sb = new StringBuilder();
-        for (TokenInfo token : tokens) {
-            sb.append((char) token.type);
+        // Создаем защитную копию списка для итерации
+        List<TokenInfo> tokensCopy = new ArrayList<>(tokens);
+        for (TokenInfo token : tokensCopy) {
+            if (token != null) {
+                if (token.type != -1) {
+                    sb.append((char) token.type);
+                } else {
+                    sb.append('?');
+                }
+            } else {
+                sb.append('?');
+            }
         }
         return sb.toString();
     }
 }
-
