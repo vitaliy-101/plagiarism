@@ -93,12 +93,13 @@ public class CoreService {
         for (TokenInfo token : tokensCopy) {
             if (token != null) {
                 if (token.type != -1) {
-                    sb.append((char) token.type);
+                    sb.append(token.normalizedText);
+                    sb.append(' ');
                 } else {
-                    sb.append('?');
+                    sb.append(' ');
                 }
             } else {
-                sb.append('?');
+                sb.append(' ');
             }
         }
         return sb.toString();
