@@ -69,17 +69,18 @@ public class CoreService {
         System.out.println("BEFORE GREEDY: " + file1.getFilename() + "; " + file2.getFilename());
         try {
             GreedyStringTiling greedyStringTiling = new GreedyStringTiling();
-            PlagResult res = greedyStringTiling.run(submission1, submission2, 9, 0.8f);
+            PlagResult res = greedyStringTiling.run(submission1, submission2, 20, 0.8f);
             result.setSimilarity((double) Math.round(res.getSimilarity()));
             result.setSimilarityParts(res.getTiles().stream().map(t -> {
                 SimilarityPart part = new SimilarityPart();
                 part.setPositionInFirstFile((long) tokens1.get(t.patternPostion).line);
-                int line1p = tokens1.get(t.patternPostion).line;
-                int line2p = tokens1.get(t.patternPostion + t.length - 1).line;
-                int line1t = tokens2.get(t.textPosition).line;
-                int line2t = tokens2.get(t.textPosition + t.length - 1).line;
-                part.setLength((long) Math.max(line2p - line1p + 1, line2t - line1t + 1));
                 part.setPositionInSecondFile((long) tokens2.get(t.textPosition).line);
+                int lengthInFirstFile = tokens1.get(t.patternPostion + t.length - 1).line -
+                        tokens1.get(t.patternPostion).line + 1;
+                int lengthInSecondFile = tokens2.get(t.textPosition + t.length - 1).line -
+                        tokens2.get(t.textPosition).line + 1;
+                part.setLengthInFirstFile((long) lengthInFirstFile);
+                part.setLengthInSecondFile((long) lengthInSecondFile);
                 return part;
             }).toList());
         } catch (Exception e) {

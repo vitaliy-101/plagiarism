@@ -8,5 +8,6 @@ import lombok.Setter;
 public class SimilarityPart {
     private Long positionInFirstFile;
     private Long positionInSecondFile;
-    private Long length;
+    private Long lengthInFirstFile;
+    private Long lengthInSecondFile;
 }

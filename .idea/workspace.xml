@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="поправил баг">
+    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="пофиксил алгоритм - теперь вроде нормально сравнивает. Правда только для cpp, python и go. На Java виснет">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/GreedyStringTiling.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/GreedyStringTiling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devkit/src/main/java/com/example/content/SimilarityPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/devkit/src/main/java/com/example/content/SimilarityPart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/service/CoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/service/CoreService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -208,7 +207,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746197819759</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="пофиксил алгоритм - теперь вроде нормально сравнивает. Правда только для cpp, python и go. На Java виснет">
+      <option name="closed" value="true" />
+      <created>1746297739241</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1746297739241</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,7 +241,8 @@
     <MESSAGE value="resolve conflict" />
     <MESSAGE value="ручка для сравнения" />
     <MESSAGE value="поправил баг" />
-    <option name="LAST_COMMIT_MESSAGE" value="поправил баг" />
+    <MESSAGE value="пофиксил алгоритм - теперь вроде нормально сравнивает. Правда только для cpp, python и go. На Java виснет" />
+    <option name="LAST_COMMIT_MESSAGE" value="пофиксил алгоритм - теперь вроде нормально сравнивает. Правда только для cpp, python и go. На Java виснет" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
