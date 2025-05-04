@@ -2,7 +2,7 @@ package org.example.token;
 
 import com.example.content.Language;
 import cpp14.grammar.CPP14Parser;
-import java8.grammar.Java8Lexer;
+import java8.grammar.JavaLexer;
 import python3.grammar.PythonLexer;
 import cpp14.grammar.CPP14Lexer;
 import go.grammar.GoLexer;
@@ -48,16 +48,16 @@ public class TokenInfo {
     }
 
     private boolean isIdentifierJava(int type) {
-        return type == Java8Lexer.Identifier;
+        return type == JavaLexer.IDENTIFIER;
     }
 
     private boolean isLiteralJava(int type) {
-        return type == Java8Lexer.IntegerLiteral
-                || type == Java8Lexer.FloatingPointLiteral
-                || type == Java8Lexer.BooleanLiteral
-                || type == Java8Lexer.CharacterLiteral
-                || type == Java8Lexer.StringLiteral
-                || type == Java8Lexer.NullLiteral;
+        return type == JavaLexer.DECIMAL_LITERAL
+                || type == JavaLexer.FLOAT_LITERAL
+                || type == JavaLexer.BOOL_LITERAL
+                || type == JavaLexer.CHAR_LITERAL
+                || type == JavaLexer.STRING_LITERAL
+                || type == JavaLexer.NULL_LITERAL;
     }
 
     private boolean isIdentifierPython(int type) {

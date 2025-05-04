@@ -5,9 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="пофиксил алгоритм - теперь вроде нормально сравнивает. Правда только для cpp, python и go. На Java виснет">
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/antlr4/java8/JavaLexer.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/antlr4/java8/JavaParser.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaLexer.interp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaLexer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaLexer.tokens" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaParser.interp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaParser.tokens" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaParserBaseListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaParserListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devkit/src/main/java/com/example/content/SimilarityPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/devkit/src/main/java/com/example/content/SimilarityPart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/service/CoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/service/CoreService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/JavaTokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/JavaTokenCollector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/antlr4/java8/Java8Lexer.g4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/antlr4/java8/Java8Parser.g4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8Lexer.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8Lexer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8Lexer.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8Parser.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8Parser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8Parser.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8ParserBaseListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8ParserListener.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +49,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -80,12 +100,12 @@
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.PlagiarismAppApplication.executor": "Run",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "fixcomparison",
     "go.import.settings.migrated": "true",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Vitaliy/IDEA/plagiarism-work/devkit/src/main/java/com/example/content",
+    "last_opened_file_path": "D:/MyScripts/2nd_course_work/plagiarism2/plagiarism-languages/java8/src/main/antlr4/java8",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
