@@ -69,7 +69,7 @@ public class CoreService {
         System.out.println("BEFORE GREEDY: " + file1.getFilename() + "; " + file2.getFilename());
         try {
             GreedyStringTiling greedyStringTiling = new GreedyStringTiling();
-            PlagResult res = greedyStringTiling.run(submission1, submission2, 20, 0.8f);
+            PlagResult res = greedyStringTiling.run(submission1, submission2, 9, 0.4f);
             result.setSimilarity((double) Math.round(res.getSimilarity()));
             result.setSimilarityParts(res.getTiles().stream().map(t -> {
                 SimilarityPart part = new SimilarityPart();

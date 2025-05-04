@@ -4,30 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="пофиксил алгоритм - теперь вроде нормально сравнивает. Правда только для cpp, python и go. На Java виснет">
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/antlr4/java8/JavaLexer.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/antlr4/java8/JavaParser.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaLexer.interp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaLexer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaLexer.tokens" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaParser.interp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaParser.tokens" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaParserBaseListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/JavaParserListener.java" afterDir="false" />
+    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="Поправил лексер для Java. Теперь на Java не падает и впринципе на больших репозиториях не должно падать">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/JavaTokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/JavaTokenCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/antlr4/java8/Java8Lexer.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/antlr4/java8/Java8Parser.g4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8Lexer.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8Lexer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8Lexer.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8Parser.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8Parser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8Parser.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8ParserBaseListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-languages/java8/src/main/java/java8/grammar/Java8ParserListener.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,11 +101,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\MyScripts\2nd_course_work\plagiarism2\plagiarism-languages\java8\src\main\antlr4\java8" />
       <recent name="E:\Vitaliy\IDEA\plagiarism-work\devkit\src\main\java\com\example\content" />
       <recent name="E:\Vitaliy\IDEA\plagiarism-work\plagiarism-app\src\main\java\com\example\plagiarismapp\controller" />
       <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\java\go\grammar" />
       <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\java" />
-      <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\antlr4" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Vitaliy\IDEA\plagiarism-work\src\main\java\org\example\content" />
@@ -235,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746297739241</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Поправил лексер для Java. Теперь на Java не падает и впринципе на больших репозиториях не должно падать">
+      <option name="closed" value="true" />
+      <created>1746362117610</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1746362117610</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,7 +248,8 @@
     <MESSAGE value="ручка для сравнения" />
     <MESSAGE value="поправил баг" />
     <MESSAGE value="пофиксил алгоритм - теперь вроде нормально сравнивает. Правда только для cpp, python и go. На Java виснет" />
-    <option name="LAST_COMMIT_MESSAGE" value="пофиксил алгоритм - теперь вроде нормально сравнивает. Правда только для cpp, python и go. На Java виснет" />
+    <MESSAGE value="Поправил лексер для Java. Теперь на Java не падает и впринципе на больших репозиториях не должно падать" />
+    <option name="LAST_COMMIT_MESSAGE" value="Поправил лексер для Java. Теперь на Java не падает и впринципе на больших репозиториях не должно падать" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
