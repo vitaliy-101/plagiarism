@@ -7,6 +7,8 @@ import python3.grammar.PythonLexer;
 import cpp14.grammar.CPP14Lexer;
 import go.grammar.GoLexer;
 
+import java.util.function.Function;
+
 public class TokenInfo {
 
 
@@ -25,12 +27,17 @@ public class TokenInfo {
         this.normalizedText = normalize(lang, this.type, text);
     }
 
+    public TokenInfo(String text, int type, int line, int column, String normalizedText) {
+        this.text = text;
+        this.type = type;
+        this.line = line;
+        this.column = column;
+        this.normalizedText = normalizedText;
+    }
+
+
     public String normalize(Language lang, int type, String text) {
         switch (lang) {
-            case JAVA:
-                if (isIdentifierJava(type)) return "id";
-                if (isLiteralJava(type)) return "lit";
-                break;
             case PY:
                 if (isIdentifierPython(type)) return "id";
                 if (isLiteralPython(type)) return "lit";
@@ -45,19 +52,6 @@ public class TokenInfo {
                 break;
         }
         return text;
-    }
-
-    private boolean isIdentifierJava(int type) {
-        return type == JavaLexer.IDENTIFIER;
-    }
-
-    private boolean isLiteralJava(int type) {
-        return type == JavaLexer.DECIMAL_LITERAL
-                || type == JavaLexer.FLOAT_LITERAL
-                || type == JavaLexer.BOOL_LITERAL
-                || type == JavaLexer.CHAR_LITERAL
-                || type == JavaLexer.STRING_LITERAL
-                || type == JavaLexer.NULL_LITERAL;
     }
 
     private boolean isIdentifierPython(int type) {

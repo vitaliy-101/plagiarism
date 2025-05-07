@@ -3,6 +3,7 @@ package org.example.service;
 import com.example.content.*;
 import org.example.gst.GreedyStringTiling;
 import org.example.gst.PlagResult;
+import org.example.normalization.strategy.NormalizationManager;
 import org.example.token.TokenInfo;
 import org.example.token.strategy.TokenCollectorManager;
 import reactor.core.publisher.Flux;
@@ -59,9 +60,11 @@ public class CoreService {
         result.setFullFilenameSecond(file2.getFullFilename());
         System.out.println("START COMPARE: " + file1.getFilename() + "; " + file2.getFilename());
 
-        // Создаем защитную копию списка токенов
-        List<TokenInfo> tokens1 = new ArrayList<>(tokenCollectorManager.collectTokensFromFile(language1, file1.getContent()));
-        List<TokenInfo> tokens2 = new ArrayList<>(tokenCollectorManager.collectTokensFromFile(language2, file2.getContent()));
+        NormalizationManager normalizationManager = new NormalizationManager();
+        List<TokenInfo> tokens1 = new ArrayList<>(normalizationManager.normalizeTokens(language1,
+                tokenCollectorManager.collectTokensFromFile(language1, file1.getContent())));
+        List<TokenInfo> tokens2 = new ArrayList<>(normalizationManager.normalizeTokens(language2,
+                tokenCollectorManager.collectTokensFromFile(language2, file2.getContent())));
 
         String[] submission1 = getTokenNames(tokens1);
         String[] submission2 = getTokenNames(tokens2);
@@ -73,14 +76,22 @@ public class CoreService {
             result.setSimilarity((double) Math.round(res.getSimilarity()));
             result.setSimilarityParts(res.getTiles().stream().map(t -> {
                 SimilarityPart part = new SimilarityPart();
-                part.setPositionInFirstFile((long) tokens1.get(t.patternPostion).line);
-                part.setPositionInSecondFile((long) tokens2.get(t.textPosition).line);
-                int lengthInFirstFile = tokens1.get(t.patternPostion + t.length - 1).line -
-                        tokens1.get(t.patternPostion).line + 1;
-                int lengthInSecondFile = tokens2.get(t.textPosition + t.length - 1).line -
-                        tokens2.get(t.textPosition).line + 1;
-                part.setLengthInFirstFile((long) lengthInFirstFile);
-                part.setLengthInSecondFile((long) lengthInSecondFile);
+
+                part.setStartLineInFirstFile((long) tokens1.get(t.patternPostion).line);
+                part.setStartColumnInFirstFile((long) tokens1.get(t.patternPostion).column);
+                part.setEndLineInFirstFile((long) tokens1.get(t.patternPostion + t.length - 1).line);
+                part.setEndColumnInFirstFile((long) tokens1.get(t.patternPostion + t.length - 1).column);
+
+                part.setStartLineInSecondFile((long) tokens2.get(t.textPosition).line);
+                part.setStartColumnInSecondFile((long) tokens2.get(t.textPosition).column);
+                part.setEndLineInSecondFile((long) tokens2.get(t.textPosition + t.length - 1).line);
+                part.setEndColumnInSecondFile((long) tokens2.get(t.textPosition + t.length - 1).column);
+
+
+                part.setSimilarFragmentInFirstFile(getSimilarFragmentString(tokens1, t.patternPostion,
+                        t.patternPostion + t.length - 1));
+                part.setSimilarFragmentInSecondFile(getSimilarFragmentString(tokens2, t.textPosition,
+                        t.textPosition + t.length - 1));
                 return part;
             }).toList());
         } catch (Exception e) {
@@ -101,5 +112,14 @@ public class CoreService {
                 tokenNames[i] = "?";
         }
         return tokenNames;
+    }
+
+    private String getSimilarFragmentString(List<TokenInfo> tokens, int startIndex, int endIndex) {
+        StringBuilder result = new StringBuilder();
+        for (int i = startIndex; i <= endIndex; i++) {
+            result.append(tokens.get(i).text);
+        }
+
+        return result.toString();
     }
 }
