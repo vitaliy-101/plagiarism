@@ -2,10 +2,12 @@ package org.example.token;
 
 import com.example.content.Language;
 import cpp14.grammar.CPP14Parser;
-import java8.grammar.Java8Lexer;
+import java8.grammar.JavaLexer;
 import python3.grammar.PythonLexer;
 import cpp14.grammar.CPP14Lexer;
 import go.grammar.GoLexer;
+
+import java.util.function.Function;
 
 public class TokenInfo {
 
@@ -17,19 +19,25 @@ public class TokenInfo {
     public final String normalizedText;
 
     public TokenInfo(String text, int type, int line, int column, Language lang) {
+        // Если type равен -1 (неизвестный тип), устанавливаем тип по умолчанию, например, 0
+        this.text = text;
+        this.type = (type == -1) ? 0 : type; // Устанавливаем дефолтный тип, если тип токена недействителен
+        this.line = line;
+        this.column = column;
+        this.normalizedText = normalize(lang, this.type, text);
+    }
+
+    public TokenInfo(String text, int type, int line, int column, String normalizedText) {
         this.text = text;
         this.type = type;
         this.line = line;
         this.column = column;
-        this.normalizedText = normalize(lang, type, text);
+        this.normalizedText = normalizedText;
     }
+
 
     public String normalize(Language lang, int type, String text) {
         switch (lang) {
-            case JAVA:
-                if (isIdentifierJava(type)) return "id";
-                if (isLiteralJava(type)) return "lit";
-                break;
             case PY:
                 if (isIdentifierPython(type)) return "id";
                 if (isLiteralPython(type)) return "lit";
@@ -44,19 +52,6 @@ public class TokenInfo {
                 break;
         }
         return text;
-    }
-
-    private boolean isIdentifierJava(int type) {
-        return type == Java8Lexer.Identifier;
-    }
-
-    private boolean isLiteralJava(int type) {
-        return type == Java8Lexer.IntegerLiteral
-                || type == Java8Lexer.FloatingPointLiteral
-                || type == Java8Lexer.BooleanLiteral
-                || type == Java8Lexer.CharacterLiteral
-                || type == Java8Lexer.StringLiteral
-                || type == Java8Lexer.NullLiteral;
     }
 
     private boolean isIdentifierPython(int type) {

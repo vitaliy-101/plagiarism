@@ -17,7 +17,7 @@ while True:
 		if y == '-0.000':
 			y = '0.000'
 			
-		print x, y
+		print(x, y)
 	
 	except EOFError:
 		break
