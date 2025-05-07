@@ -1,4 +1,5 @@
-package com.example.content;
+package com.example.plagiarismapp.dto.request.project;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FileContent {
-    private String fullFilename;
-    private String filename;
-    private String content;
+public class ProjectRequest {
+    private Long userId;
+    private Long projectId;
 }

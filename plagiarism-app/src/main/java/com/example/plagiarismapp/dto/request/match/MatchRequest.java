@@ -1,16 +1,14 @@
-package com.example.content;
+package com.example.plagiarismapp.dto.request.match;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FileContent {
-    private String fullFilename;
-    private String filename;
-    private String content;
+public class MatchRequest {
+    private Long projectId;
 }

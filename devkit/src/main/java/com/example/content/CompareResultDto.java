@@ -11,10 +11,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RepositoryContent {
-    private String repositoryUrl;
-    private String repositoryName;
-    private String owner;
-    private List<FileContent> files;
-    private Language language;
+public class CompareResultDto {
+    List<CompareTwoRepositoryDto> results;
 }

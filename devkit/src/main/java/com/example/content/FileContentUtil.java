@@ -9,7 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FileContent {
+public class FileContentUtil {
+
+    private Long id;
     private String fullFilename;
     private String filename;
     private String content;

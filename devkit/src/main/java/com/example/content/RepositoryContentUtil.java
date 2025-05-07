@@ -1,6 +1,5 @@
-package com.example.plagiarismapp.dto;
+package com.example.content;
 
-import com.example.content.Language;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,12 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RepositoryRequest {
-    private List<String> repositoryUrls;
+public class RepositoryContentUtil {
+
+    private Long id;
+    private String repositoryUrl;
+    private String repositoryName;
+    private String owner;
+    private List<FileContentUtil> files;
     private Language language;
 }

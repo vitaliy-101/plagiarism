@@ -7,14 +7,12 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RepositoryContent {
-    private String repositoryUrl;
-    private String repositoryName;
-    private String owner;
-    private List<FileContent> files;
-    private Language language;
+public class CompareTwoRepositoryDto {
+    private Long idFirstRepository;
+    private Long idSecondRepository;
+    private List<CompareTwoFilesDto> compareFiles;
 }

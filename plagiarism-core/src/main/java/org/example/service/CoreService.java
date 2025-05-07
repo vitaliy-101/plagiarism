@@ -1,8 +1,10 @@
 package org.example.service;
 
-import com.example.content.FileContent;
-import com.example.content.RepositoryContent;
+import com.example.content.*;
 import org.antlr.v4.runtime.misc.Pair;
+import org.example.gst.GreedyStringTiling;
+import org.example.gst.PlagResult;
+import org.example.token.TokenInfo;
 import org.example.token.strategy.TokenCollectorManager;
 
 import java.util.ArrayList;
@@ -17,30 +19,33 @@ public class CoreService {
         this.tokenCollectorManager = tokenCollectorManager;
     }
 
-    public CompareTwoRepositoryDto compareRepositories (RepositoryContent firstRepository, RepositoryContent secondRepository) {
+    public CompareTwoRepositoryDto compareRepositories (RepositoryContentUtil firstRepository, RepositoryContentUtil secondRepository) {
 
         CompareTwoRepositoryDto compareResult = new CompareTwoRepositoryDto();
-        compareResult.setFirstRepository(firstRepository);
-        compareResult.setSecondRepository(secondRepository);
+        compareResult.setIdFirstRepository(firstRepository.getId());
+        compareResult.setIdSecondRepository(secondRepository.getId());
         compareResult.setCompareFiles(new ArrayList<>());
 
-        Set<Pair<FileContent, FileContent>> comparedFiles = new HashSet<>();
+        List<Pair<FileContentUtil, FileContentUtil>> comparedFiles = new ArrayList<>();
 
-        for (FileContent file : firstRepository.getFiles()) {
-            for (FileContent file2 : secondRepository.getFiles()) {
-                Pair<FileContent, FileContent> pair = new Pair(file, file2);
+        for (FileContentUtil file : firstRepository.getFiles()) {
+            for (FileContentUtil file2 : secondRepository.getFiles()) {
+                Pair<FileContentUtil, FileContentUtil> pair = new Pair(file, file2);
                 comparedFiles.add(pair);
             }
         }
 
-        for (Pair<FileContent, FileContent> pair : comparedFiles) {
+        for (Pair<FileContentUtil, FileContentUtil> pair : comparedFiles) {
             CompareTwoFilesDto result = new CompareTwoFilesDto();
-            FileContent firstFile = pair.a;
-            FileContent secondFile = pair.b;
+            FileContentUtil firstFile = pair.a;
+            FileContentUtil secondFile = pair.b;
 
 
-            result.setFullFilenameFirst(firstFile.getFullFilename());
-            result.setFullFilenameSecond(secondFile.getFullFilename());
+            result.setIdFirstFile(firstFile.getId());
+
+            result.setIdSecondFile(secondFile.getId());
+
+
 
 
 
@@ -69,13 +74,18 @@ public class CoreService {
 
             PlagResult res = GreedyStringTiling.run(submission1, submission2, 1, 0.8f);
 
-            result.setSimilarity((double) Math.round(res.getSimilarity()));
+            result.setSimilarity((double) res.getSimilarity());
 
+            String text1 = submission1;
+            String text2 = submission2;
             result.setSimilarityParts(res.getTiles().stream().map(t -> {
+
                 SimilarityPart part = new SimilarityPart();
-                part.setPatternPostion((long) t.patternPostion);
+                part.setPositionInFirstFile((long) t.patternPostion);
                 part.setLength((long) t.length);
-                part.setTextPosition((long) t.textPosition);
+                part.setPositionInSecondFile((long) t.textPosition);
+                part.setTextInFirstFile(text1.substring(t.patternPostion, t.patternPostion + t.length));
+                part.setTextInSecondFile(text2.substring(t.textPosition, t.textPosition + t.length));
                 return part;
             }).toList());
 
