@@ -63,8 +63,10 @@ public class FileService {
 
                     response.setTiles(x.getTiles().stream().map(y -> {
                         TileResponse tileResponse = new TileResponse();
-                        tileResponse.setPositionInFirstFile(y.getPositionInFirstFile());
-                        tileResponse.setPositionInSecondFile(y.getPositionInSecondFile());
+                        tileResponse.setStartLineInFirstFile(y.getStartLineInFirstFile());
+                        tileResponse.setStartLineInSecondFile(y.getStartLineInSecondFile());
+                        tileResponse.setEndLineInFirstFile(y.getEndLineInFirstFile());
+                        tileResponse.setEndLineInSecondFile(y.getEndLineInSecondFile());
                         tileResponse.setTextInFirstFile(y.getTextInFirstFile());
                         tileResponse.setTextInSecondFile(y.getTextInSecondFile());
                         return tileResponse;

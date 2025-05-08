@@ -16,11 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class CoreService {
     private final TokenCollectorManager tokenCollectorManager;
 
@@ -28,13 +23,13 @@ public class CoreService {
         this.tokenCollectorManager = tokenCollectorManager;
     }
 
-    public Mono<CompareTwoRepositoryDto> compareRepositoriesReactive(RepositoryContent firstRepository, RepositoryContent secondRepository) {
+    public Mono<CompareTwoRepositoryDto> compareRepositoriesReactive(RepositoryContentUtil firstRepository, RepositoryContentUtil secondRepository) {
         CompareTwoRepositoryDto compareResult = new CompareTwoRepositoryDto();
-        compareResult.setFirstRepository(firstRepository);
-        compareResult.setSecondRepository(secondRepository);
+        compareResult.setIdFirstRepository(firstRepository.getId());
+        compareResult.setIdSecondRepository(secondRepository.getId());
 
-        Flux<FileContent> firstFiles = Flux.fromIterable(firstRepository.getFiles()).cache();
-        Flux<FileContent> secondFiles = Flux.fromIterable(secondRepository.getFiles()).cache();
+        Flux<FileContentUtil> firstFiles = Flux.fromIterable(firstRepository.getFiles()).cache();
+        Flux<FileContentUtil> secondFiles = Flux.fromIterable(secondRepository.getFiles()).cache();
 
         return firstFiles
                 .flatMap(file1 -> secondFiles
@@ -59,10 +54,11 @@ public class CoreService {
                 .timeout(Duration.ofSeconds(250));
     }
 
-    private CompareTwoFilesDto compareTwoFiles(Language language1, Language language2, FileContent file1, FileContent file2) {
+    private CompareTwoFilesDto compareTwoFiles(Language language1, Language language2, FileContentUtil file1, FileContentUtil file2) {
         var result = new CompareTwoFilesDto();
-        result.setFullFilenameFirst(file1.getFullFilename());
-        result.setFullFilenameSecond(file2.getFullFilename());
+        result.setIdFirstFile(file1.getId());
+        result.setIdSecondFile(file2.getId());
+
         System.out.println("START COMPARE: " + file1.getFilename() + "; " + file2.getFilename());
 
         NormalizationManager normalizationManager = new NormalizationManager();
@@ -91,85 +87,6 @@ public class CoreService {
                 part.setStartColumnInSecondFile((long) tokens2.get(t.textPosition).column);
                 part.setEndLineInSecondFile((long) tokens2.get(t.textPosition + t.length - 1).line);
                 part.setEndColumnInSecondFile((long) tokens2.get(t.textPosition + t.length - 1).column);
-
-    public CompareTwoRepositoryDto compareRepositories (RepositoryContentUtil firstRepository, RepositoryContentUtil secondRepository) {
-
-        CompareTwoRepositoryDto compareResult = new CompareTwoRepositoryDto();
-        compareResult.setIdFirstRepository(firstRepository.getId());
-        compareResult.setIdSecondRepository(secondRepository.getId());
-        compareResult.setCompareFiles(new ArrayList<>());
-
-        List<Pair<FileContentUtil, FileContentUtil>> comparedFiles = new ArrayList<>();
-
-        for (FileContentUtil file : firstRepository.getFiles()) {
-            for (FileContentUtil file2 : secondRepository.getFiles()) {
-                Pair<FileContentUtil, FileContentUtil> pair = new Pair(file, file2);
-                comparedFiles.add(pair);
-            }
-        }
-
-        for (Pair<FileContentUtil, FileContentUtil> pair : comparedFiles) {
-            CompareTwoFilesDto result = new CompareTwoFilesDto();
-            FileContentUtil firstFile = pair.a;
-            FileContentUtil secondFile = pair.b;
-
-
-            result.setIdFirstFile(firstFile.getId());
-
-            result.setIdSecondFile(secondFile.getId());
-
-
-
-
-
-            List<TokenInfo> Submission1Tokens = tokenCollectorManager.collectTokensFromFile(firstRepository.getLanguage(), firstFile.getContent());
-            List<TokenInfo> Submission2Tokens = tokenCollectorManager.collectTokensFromFile(secondRepository.getLanguage(), secondFile.getContent());
-
-
-            StringBuilder submissionBuild1 = new StringBuilder();
-            for (TokenInfo token : Submission1Tokens) {
-                submissionBuild1.append((char) token.type);
-            }
-            String submission1 = submissionBuild1.toString();
-
-            StringBuilder submissionBuild2 = new StringBuilder();
-            for (TokenInfo token : Submission2Tokens) {
-                submissionBuild2.append((char) token.type);
-            }
-            String submission2 = submissionBuild2.toString();
-
-            if (submission1.length() > submission2.length()) {
-                String temp = submission1;
-                submission1 = submission2;
-                submission2 = temp;
-
-            }
-
-            PlagResult res = GreedyStringTiling.run(submission1, submission2, 1, 0.8f);
-
-            result.setSimilarity((double) res.getSimilarity());
-
-            String text1 = submission1;
-            String text2 = submission2;
-            result.setSimilarityParts(res.getTiles().stream().map(t -> {
-
-                SimilarityPart part = new SimilarityPart();
-                part.setPositionInFirstFile((long) t.patternPostion);
-                part.setLength((long) t.length);
-                part.setPositionInSecondFile((long) t.textPosition);
-                part.setTextInFirstFile(text1.substring(t.patternPostion, t.patternPostion + t.length));
-                part.setTextInSecondFile(text2.substring(t.textPosition, t.textPosition + t.length));
-                return part;
-            }).toList());
-
-            compareResult.getCompareFiles().add(result);
-        }
-
-
-
-        return compareResult;
-    }
-
                 part.setSimilarFragmentInFirstFile(getSimilarFragmentString(tokens1, t.patternPostion,
                         t.patternPostion + t.length - 1));
                 part.setSimilarFragmentInSecondFile(getSimilarFragmentString(tokens2, t.textPosition,
@@ -184,6 +101,7 @@ public class CoreService {
         System.out.println("END NAMES: " + file1.getFilename() + "; " + file2.getFilename());
         return result;
     }
+
 
     private String[] getTokenNames(List<TokenInfo> tokens) {
         String[] tokenNames = new String[tokens.size()];

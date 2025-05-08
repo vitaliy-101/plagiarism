@@ -18,11 +18,17 @@ public class Tile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "position_in_first_file")
-    private Long positionInFirstFile;
+    @Column(name = "start_line_in_first_file")
+    private Long startLineInFirstFile;
 
-    @Column(name = "position_in_second_file")
-    private Long positionInSecondFile;
+    @Column(name = "end_line_in_first_file")
+    private Long endLineInFirstFile;
+
+    @Column(name = "start_line_in_second_file")
+    private Long startLineInSecondFile;
+
+    @Column(name = "end_line_in_second_file")
+    private Long endLineInSecondFile;
 
     @Column(name = "text_in_first_file")
     private String textInFirstFile;

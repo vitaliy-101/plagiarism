@@ -10,8 +10,11 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     database: postgresql
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
 
 
 server:
-  port: 8124
+  port: 8045

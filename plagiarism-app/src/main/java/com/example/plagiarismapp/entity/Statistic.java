@@ -17,8 +17,8 @@ public class Statistic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nummer_of_repositories")
-    private Long nummerOfRepositories;
+    @Column(name = "number_of_repositories")
+    private Long numberOfRepositories;
     @Column(name = "number_of_files")
     private Long numberOfFiles;
     @Column(name = "number_of_suspicious_files")

@@ -23,9 +23,4 @@ public class RepositoryController {
     public void deleteRepository(@PathVariable("projectId") Long projectId, @PathVariable("repositoryId") Long repositoryId) {
         repositoryService.deleteRepository(projectId, repositoryId);
     }
-
-    @PostMapping("/compare")
-    public Mono<CompareResultDto> compareV3(@RequestBody RepositoryRequest request) {
-        return service.comparingRepositoriesReactive(service.processRepositoriesReactive(request));
-    }
 }

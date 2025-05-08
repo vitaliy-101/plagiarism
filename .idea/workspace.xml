@@ -4,17 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="add support of languages&#10;- add python, c++, go">
-      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/data/cpp/p001541052.cpp" afterDir="false" />
+    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="web v1.0">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/docker-compose.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-app/src/main/resources/db/migration/V1_1_0__Init.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/GreedyStringTiling.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/GreedyStringTiling.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/CppTokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/CppTokenCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/GoTokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/GoTokenCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/JavaTokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/JavaTokenCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/PythonTokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/PythonTokenCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/strategy/TokenCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/strategy/TokenCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/strategy/TokenCollectorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/strategy/TokenCollectorManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/RepositoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/RepositoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/dto/response/match/TileResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/dto/response/match/TileResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/RepositoryProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/RepositoryProject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Statistic.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Statistic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/FileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/FileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/ProjectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/service/CoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/service/CoreService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +63,10 @@
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="true" />
   </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -72,10 +82,21 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Docker.deploy/docker-compose.yaml: Compose Deployment.executor": "Run",
+    "JAR Application.plagiarism-app-0.0.1-SNAPSHOT.jar.executor": "Run",
+    "Maven.devkit [clean,install].executor": "Run",
+    "Maven.go [clean,install].executor": "Run",
+    "Maven.java8 [clean,install].executor": "Run",
+    "Maven.plagiarism-app [clean,install].executor": "Run",
+    "Maven.plagiarism-app [clean,package].executor": "Run",
     "Maven.plagiarism-core [clean,compile].executor": "Run",
     "Maven.plagiarism-core [clean,install].executor": "Run",
     "Maven.plagiarism-core [compile].executor": "Run",
+    "Maven.plagiarism-languages [clean,install].executor": "Run",
     "Maven.plagiarism-work [clean,install].executor": "Run",
+    "Maven.plagiarism-work [compile].executor": "Run",
+    "Maven.plagiarism-work [deploy].executor": "Run",
+    "Maven.python3 [clean,install].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -87,7 +108,7 @@
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.PlagiarismAppApplication.executor": "Run",
-    "git-widget-placeholder": "fixcomprasion",
+    "git-widget-placeholder": "master",
     "go.import.settings.migrated": "true",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
@@ -114,6 +135,8 @@
       <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\antlr4" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\SpringProject\Project\plagiarism\deploy" />
+      <recent name="D:\SpringProject\Project\plagiarism\plagiarism-app\src\main\resources\db" />
       <recent name="E:\Vitaliy\IDEA\plagiarism-work\src\main\java\org\example\content" />
       <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\antlr4\go" />
     </key>
@@ -122,7 +145,7 @@
       <recent name="python3.grammar" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JAR Application.plagiarism-app-0.0.1-SNAPSHOT.jar">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
       <module name="plagiarism-core" />
@@ -136,6 +159,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="plagiarism-app-0.0.1-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/plagiarism-app/target/plagiarism-app-0.0.1-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
     <configuration name="PlagiarismAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="plagiarism-app" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.plagiarismapp.PlagiarismAppApplication" />
@@ -143,8 +170,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="deploy/docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="deploy/docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.plagiarism-app-0.0.1-SNAPSHOT.jar" />
+        <item itemvalue="Docker.deploy/docker-compose.yaml: Compose Deployment" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>

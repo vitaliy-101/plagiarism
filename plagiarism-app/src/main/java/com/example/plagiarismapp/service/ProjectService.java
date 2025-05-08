@@ -10,9 +10,15 @@ import com.example.plagiarismapp.exception.ProcessGitEcxeption;
 import com.example.plagiarismapp.repository.*;
 import lombok.RequiredArgsConstructor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.service.CoreService;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
+import reactor.util.function.Tuples;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +27,7 @@ import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ProjectService {
     private final GitService gitService;
     private final CoreService coreService;
@@ -31,6 +38,7 @@ public class ProjectService {
     private final StatisticRepository statisticRepository;
     private final MatchRepository matchRepository;
     private final TileRepository tileRepository;
+
 
 
     public Project downloadProject(ProjectCreateRequest request) {
@@ -80,6 +88,7 @@ public class ProjectService {
         return project;
     }
 
+
     public Statistic compareRepositories(Long projectId) {
 
         var project = projectRepository.findById(projectId).orElseThrow(
@@ -120,10 +129,11 @@ public class ProjectService {
                 repositoryContent2.setId(repositoryProjects.get(j).getId());
                 repositoryContent2.setFiles(files2);
                 repositoryContent2.setLanguage(repositoryProjects.get(j).getLanguage());
-                CompareTwoRepositoryDto compareResult =
-                        coreService.compareRepositories(repositoryContent1, repositoryContent2);
+                Mono<CompareTwoRepositoryDto> compareResult =
+                        coreService.compareRepositoriesReactive(repositoryContent1, repositoryContent2);
 
-                allCompare.add(compareResult);
+
+                allCompare.add(compareResult.block());
             }
 
         }
@@ -146,10 +156,12 @@ public class ProjectService {
             y.getSimilarityParts().forEach(z -> {
                 Tile tile = new Tile();
                 tile.setMatch(match);
-                tile.setPositionInFirstFile(z.getPositionInFirstFile());
-                tile.setPositionInSecondFile(z.getPositionInSecondFile());
-                tile.setTextInFirstFile(z.getTextInFirstFile());
-                tile.setTextInSecondFile(z.getTextInSecondFile());
+                tile.setStartLineInFirstFile(z.getStartLineInFirstFile());
+                tile.setStartLineInFirstFile(z.getStartLineInSecondFile());
+                tile.setEndLineInFirstFile(z.getEndLineInFirstFile());
+                tile.setEndLineInSecondFile(z.getEndLineInSecondFile());
+                tile.setTextInFirstFile(z.getSimilarFragmentInFirstFile());
+                tile.setTextInSecondFile(z.getSimilarFragmentInSecondFile());
                 tiles.add(tile);
             });
 
@@ -161,7 +173,7 @@ public class ProjectService {
         }));
 
         Statistic statistic = new Statistic();
-        statistic.setNummerOfRepositories((long)project.getRepositories().size());
+        statistic.setNumberOfRepositories((long)project.getRepositories().size());
         statistic.setNumberOfFiles(project.getRepositories().stream().mapToLong(x -> x.getFiles().size()).sum());
 
         statistic.setAverageSimilarity(

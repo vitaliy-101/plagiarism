@@ -24,7 +24,7 @@ public class RepositoryProject {
     @Column(name = "url")
     private String url;
 
-    @Column(name = "name")
+    @Column(name = "name_repository")
     private String name;
 
     @Enumerated(EnumType.STRING)

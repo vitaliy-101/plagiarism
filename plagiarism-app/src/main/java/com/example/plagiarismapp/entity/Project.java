@@ -22,7 +22,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name_project")
     private String name;
 
     @Enumerated(EnumType.STRING)
