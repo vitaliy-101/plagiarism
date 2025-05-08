@@ -15,7 +15,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openApi() {
         Server server = new Server();
-        server.setUrl("http://localhost:8124");
+        server.setUrl("http://localhost:8045");
         server.setDescription("Server");
         final String securitySchemeName = "bearerAuth";
         return new OpenAPI().info(new Info().title("anti-plag-web").description("API documentation").version("1"))
