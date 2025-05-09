@@ -126,6 +126,8 @@ public class CoreService {
             if (line >= startLine && line <= endLine) {
                 if (startLine == endLine){
                     result.append(fileContent[line], startColumn, Math.min(endColumn + 1, fileContent[line].length()));
+                    if (fileContent[line].length() <= endColumn + 1)
+                        result.append("\n");
                 }
                 else if (line == startLine) {
                     result.append(fileContent[line], startColumn, fileContent[line].length());
@@ -133,6 +135,8 @@ public class CoreService {
                 }
                 else if (line == endLine) {
                     result.append(fileContent[line], 0, Math.min(endColumn + 1, fileContent[line].length()));
+                    if (fileContent[line].length() <= endColumn + 1)
+                        result.append("\n");
                 }
                 else {
                     result.append(fileContent[line]);
