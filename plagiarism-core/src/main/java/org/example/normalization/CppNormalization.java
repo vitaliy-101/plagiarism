@@ -15,25 +15,25 @@ public class CppNormalization implements Normalization {
             TokenInfo token = tokens.get(i);
             String newNorm = "default";
 
-            if (token.type == CPP14Lexer.Identifier) {
+            if (token.getType() == CPP14Lexer.Identifier) {
                 newNorm = "id";
 
                 // 2. После new — имя класса
-                if (i > 0 && tokens.get(i - 1).type == CPP14Lexer.New) {
-                    newNorm = "class" + token.text;
+                if (i > 0 && tokens.get(i - 1).getType() == CPP14Lexer.New) {
+                    newNorm = "class" + token.getText();
                 }
 
                 // 3. До скобок без точки — вызов функции
                 else if (i + 1 < tokens.size() &&
-                        tokens.get(i + 1).type == CPP14Lexer.LeftParen &&
-                        (i == 0 || !Objects.equals(tokens.get(i - 1).text, "."))) {
-                    newNorm = "func" + token.text;
+                        tokens.get(i + 1).getType() == CPP14Lexer.LeftParen &&
+                        (i == 0 || !Objects.equals(tokens.get(i - 1).getText(), "."))) {
+                    newNorm = "func" + token.getText();
                 }
 
                 // 4. После точки или стрелки — член
-                else if (i > 0 && (Objects.equals(tokens.get(i - 1).text, ".") ||
-                        Objects.equals(tokens.get(i - 1).text, "->"))) {
-                    newNorm = "member" + token.text;
+                else if (i > 0 && (Objects.equals(tokens.get(i - 1).getText(), ".") ||
+                        Objects.equals(tokens.get(i - 1).getText(), "->"))) {
+                    newNorm = "member" + token.getText();
                 }
 
                 // 5. По умолчанию — переменная
@@ -41,23 +41,24 @@ public class CppNormalization implements Normalization {
                     newNorm = "var";
                 }
 
-            } else if (token.type == CPP14Lexer.IntegerLiteral) {
+            } else if (token.getType() == CPP14Lexer.IntegerLiteral) {
                 newNorm = "decimal_lit";
-            } else if (token.type == CPP14Lexer.FloatingLiteral) {
+            } else if (token.getType() == CPP14Lexer.FloatingLiteral) {
                 newNorm = "float_lit";
-            } else if (token.type == CPP14Lexer.CharacterLiteral) {
+            } else if (token.getType() == CPP14Lexer.CharacterLiteral) {
                 newNorm = "char_lit";
-            } else if (token.type == CPP14Lexer.StringLiteral) {
+            } else if (token.getType() == CPP14Lexer.StringLiteral) {
                 newNorm = "string_lit";
-            } else if (token.text.equals("true") || token.text.equals("false")) {
+            } else if (token.getText().equals("true") || token.getText().equals("false")) {
                 newNorm = "boolean_lit";
-            } else if (token.text.equals("nullptr")) {
+            } else if (token.getText().equals("nullptr")) {
                 newNorm = "null_lit";
             } else {
                 continue;
             }
 
-            tokens.set(i, new TokenInfo(token.text, token.type, token.line, token.column, newNorm));
+            tokens.set(i, new TokenInfo(token.getText(), token.getType(), token.getLine(),
+                    token.getColumn(), token.getLength(), newNorm));
         }
 
         return tokens;

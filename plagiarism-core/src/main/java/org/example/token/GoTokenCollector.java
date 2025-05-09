@@ -18,13 +18,16 @@ public class GoTokenCollector extends GoParserBaseListener implements TokenColle
     @Override
     public void visitTerminal(TerminalNode node) {
         Token token = node.getSymbol();
-        String text = token.getText();
-        int line = token.getLine();
-        int column = token.getCharPositionInLine();
-        int type = token.getType();
-
-
-        tokens.add(new TokenInfo(text, type, line, column, Language.GO));
+        if (token.getType() == GoLexer.EOF)
+            return;
+        tokens.add(new TokenInfo(
+                token.getText(),
+                token.getType(),
+                token.getLine() - 1,
+                token.getCharPositionInLine(),
+                token.getText().length(),
+                token.getText()
+        ));
     }
 
     @Override

@@ -17,40 +17,41 @@ public class GoNormalization implements Normalization {
             String newNorm = "default";
 
             // 1. Импорты: import "fmt"
-            if (i > 0 && tokens.get(i - 1).type == GoLexer.IMPORT) {
+            if (i > 0 && tokens.get(i - 1).getType() == GoLexer.IMPORT) {
                 boolean flag = false;
-                int currLine = tokens.get(i - 1).line;
-                while (flag || tokens.get(i).line == currLine) {
-                    if (tokens.get(i).type == GoLexer.L_PAREN)
+                int currLine = tokens.get(i - 1).getLine();
+                while (flag || tokens.get(i).getLine() == currLine) {
+                    if (tokens.get(i).getType() == GoLexer.L_PAREN)
                         flag = true;
-                    else if (tokens.get(i).type == GoLexer.R_PAREN)
+                    else if (tokens.get(i).getType() == GoLexer.R_PAREN)
                         flag = false;
                     else
                     {
                         Instant instant = Instant.now();
                         long timeStampMillis = instant.toEpochMilli();
-                        newNorm = "lib_" + token.text + Math.abs(timeStampMillis);
+                        newNorm = "lib_" + token.getText() + Math.abs(timeStampMillis);
                     }
 
-                    tokens.set(i, new TokenInfo(token.text, token.type, token.line, token.column, newNorm));
+                    tokens.set(i, new TokenInfo(token.getText(), token.getType(),
+                            token.getLine(), token.getColumn(), token.getLength(), newNorm));
                     i++;
                 }
                 i--;
             }
 
-            else if (token.type == GoLexer.IDENTIFIER) {
+            else if (token.getType() == GoLexer.IDENTIFIER) {
                 newNorm = "id";
 
                 // 2. До скобок без точки — вызов функции
                 if (i + 1 < tokens.size() &&
-                        tokens.get(i + 1).type == GoLexer.L_PAREN &&
-                        (i == 0 || !Objects.equals(tokens.get(i - 1).text, "."))) {
-                    newNorm = "func" + token.text;
+                        tokens.get(i + 1).getType() == GoLexer.L_PAREN &&
+                        (i == 0 || !Objects.equals(tokens.get(i - 1).getText(), "."))) {
+                    newNorm = "func" + token.getText();
                 }
 
                 // 3. После точки — член объекта
-                else if (i > 0 && Objects.equals(tokens.get(i - 1).text, ".")) {
-                    newNorm = "member" + token.text;
+                else if (i > 0 && Objects.equals(tokens.get(i - 1).getText(), ".")) {
+                    newNorm = "member" + token.getText();
                 }
 
                 // 4. По умолчанию — переменная
@@ -58,23 +59,24 @@ public class GoNormalization implements Normalization {
                     newNorm = "var";
                 }
 
-            } else if (token.type == GoLexer.DECIMAL_LIT) {
+            } else if (token.getType() == GoLexer.DECIMAL_LIT) {
                 newNorm = "decimal_lit";
-            } else if (token.type == GoLexer.FLOAT_LIT) {
+            } else if (token.getType() == GoLexer.FLOAT_LIT) {
                 newNorm = "float_lit";
-            } else if (token.type == GoLexer.RUNE_LIT) {
+            } else if (token.getType() == GoLexer.RUNE_LIT) {
                 newNorm = "rune_lit";
-            } else if (token.type == GoLexer.RAW_STRING_LIT || token.type == GoLexer.INTERPRETED_STRING_LIT) {
+            } else if (token.getType() == GoLexer.RAW_STRING_LIT || token.getType() == GoLexer.INTERPRETED_STRING_LIT) {
                 newNorm = "string_lit";
-            } else if (token.type == GoLexer.NIL_LIT) {
+            } else if (token.getType() == GoLexer.NIL_LIT) {
                 newNorm = "null_lit";
-            } else if (token.type == GoLexer.BINARY_LIT) {
+            } else if (token.getType() == GoLexer.BINARY_LIT) {
                 newNorm = "boolean_lit";
             } else {
                 continue;
             }
 
-            tokens.set(i, new TokenInfo(token.text, token.type, token.line, token.column, newNorm));
+            tokens.set(i, new TokenInfo(token.getText(), token.getType(),
+                    token.getLine(), token.getColumn(), token.getLength(), newNorm));
         }
 
         return tokens;
