@@ -15,6 +15,7 @@ public class SimilarityPart {
     private int endLineInSecondFile;
     private int endColumnInSecondFile;
 
+    private int contextLength;
     private String similarFragmentInFirstFile;
     private String similarFragmentInSecondFile;
 }

@@ -89,12 +89,11 @@ public class CoreService {
                 part.setEndColumnInSecondFile((tokens2.get(t.textPosition + t.length - 1).getColumn() +
                         tokens2.get(t.textPosition + t.length - 1).getLength() - 1));
 
+                part.setContextLength(2);
                 part.setSimilarFragmentInFirstFile(getSimilarFragmentString(file1, part.getStartLineInFirstFile(),
-                        part.getStartColumnInFirstFile(), part.getEndLineInFirstFile(),
-                        part.getEndColumnInFirstFile()));
+                        part.getEndLineInFirstFile(), part.getContextLength()));
                 part.setSimilarFragmentInSecondFile(getSimilarFragmentString(file2, part.getStartLineInSecondFile(),
-                        part.getStartColumnInSecondFile(), part.getEndLineInSecondFile(),
-                        part.getEndColumnInSecondFile()));
+                        part.getEndLineInSecondFile(), part.getContextLength()));
                 return part;
             }).toList());
         } catch (Exception e) {
@@ -117,32 +116,16 @@ public class CoreService {
         return tokenNames;
     }
 
-    private String getSimilarFragmentString(FileContent file, int startLine, int startColumn,
-                                            int endLine, int endColumn) {
+    private String getSimilarFragmentString(FileContent file, int startLine,
+                                            int endLine, int contextLength) {
         StringBuilder result = new StringBuilder();
         String[] fileContent = file.getContent().split("\n");
+        startLine = Math.max(startLine - contextLength, 0);
+        endLine = Math.min(endLine + contextLength, fileContent.length - 1);
 
-        for (int line = 0; line < fileContent.length; line++) {
-            if (line >= startLine && line <= endLine) {
-                if (startLine == endLine){
-                    result.append(fileContent[line], startColumn, Math.min(endColumn + 1, fileContent[line].length()));
-                    if (fileContent[line].length() <= endColumn + 1)
-                        result.append("\n");
-                }
-                else if (line == startLine) {
-                    result.append(fileContent[line], startColumn, fileContent[line].length());
-                    result.append("\n");
-                }
-                else if (line == endLine) {
-                    result.append(fileContent[line], 0, Math.min(endColumn + 1, fileContent[line].length()));
-                    if (fileContent[line].length() <= endColumn + 1)
-                        result.append("\n");
-                }
-                else {
-                    result.append(fileContent[line]);
-                    result.append("\n");
-                }
-            }
+        for (int line = startLine; line <= endLine; line++) {
+            result.append(fileContent[line]);
+            result.append("\n");
         }
 
         return result.toString();
