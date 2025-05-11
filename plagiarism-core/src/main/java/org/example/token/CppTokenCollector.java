@@ -22,13 +22,16 @@ public class CppTokenCollector extends CPP14ParserBaseListener implements TokenC
     @Override
     public void visitTerminal(TerminalNode node) {
         Token token = node.getSymbol();
-        String text = token.getText();
-        int line = token.getLine();
-        int column = token.getCharPositionInLine();
-        int type = token.getType();
-
-
-        tokens.add(new TokenInfo(text, type, line, column, Language.CPP));
+        if (token.getType() == CPP14Lexer.EOF)
+            return;
+        tokens.add(new TokenInfo(
+                token.getText(),
+                token.getType(),
+                token.getLine() - 1,
+                token.getCharPositionInLine(),
+                token.getText().length(),
+                token.getText()
+        ));
     }
 
     @Override
@@ -50,7 +53,8 @@ public class CppTokenCollector extends CPP14ParserBaseListener implements TokenC
         catch (Exception e)
         {
             System.err.println(e.getMessage());
-            return List.of(new TokenInfo("Not supported", 0, 0, 0, Language.CPP));
+            return List.of(new TokenInfo("Not supported", 0, 0,
+                    0, 0, "Not supported"));
         }
     }
 }

@@ -6,15 +6,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SimilarityPart {
-    private Long startLineInFirstFile;
-    private Long startColumnInFirstFile;
-    private Long endLineInFirstFile;
-    private Long endColumnInFirstFile;
-    private Long startLineInSecondFile;
-    private Long startColumnInSecondFile;
-    private Long endLineInSecondFile;
-    private Long endColumnInSecondFile;
+    private int startLineInFirstFile;
+    private int startColumnInFirstFile;
+    private int endLineInFirstFile;
+    private int endColumnInFirstFile;
+    private int startLineInSecondFile;
+    private int startColumnInSecondFile;
+    private int endLineInSecondFile;
+    private int endColumnInSecondFile;
 
+    private int contextLength;
     private String similarFragmentInFirstFile;
     private String similarFragmentInSecondFile;
 }

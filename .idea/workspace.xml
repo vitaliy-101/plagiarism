@@ -4,20 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="web v1.1 fix">
-      <change afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/dto/request/project/RepositoryMatchResponse.java" afterDir="false" />
+    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="fix algorithm">
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/normalization/CppNormalization.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/normalization/GoNormalization.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/normalization/JavaNormalization.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/normalization/PythonNormalization.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/normalization/strategy/Normalization.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/normalization/strategy/NormalizationManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/ProjectController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/RepositoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/RepositoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/RepositoryProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/RepositoryProject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/repository/MatchRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/repository/MatchRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/FileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/FileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/ProjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/resources/db/migration/V1_1_0__Init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/resources/db/migration/V1_1_0__Init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devkit/src/main/java/com/example/content/SimilarityPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/devkit/src/main/java/com/example/content/SimilarityPart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/service/CoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/service/CoreService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/token/TokenInfo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -39,7 +36,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,19 +48,15 @@
     &quot;assignee&quot;: &quot;vys-leon&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/vitaliy-101/plagiarism.git",
-    "accountId": "b6ab72b0-8b9a-44a4-9c75-0b3ba58eba2c"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/vitaliy-101/plagiarism.git&quot;,
+    &quot;accountId&quot;: &quot;ca89cfd2-8f08-46ae-9592-230bb2f399a7&quot;
   }
-}]]></component>
+}</component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="true" />
   </component>
-  <component name="KubernetesApiPersistence">{}</component>
-  <component name="KubernetesApiProvider">{
-  &quot;isMigrated&quot;: true
-}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -76,69 +69,54 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Docker.deploy/docker-compose.yaml: Compose Deployment.executor": "Run",
-    "JAR Application.plagiarism-app-0.0.1-SNAPSHOT.jar.executor": "Run",
-    "Maven.devkit [clean,install].executor": "Run",
-    "Maven.go [clean,install].executor": "Run",
-    "Maven.java8 [clean,install].executor": "Run",
-    "Maven.plagiarism-app [clean,install].executor": "Run",
-    "Maven.plagiarism-app [clean,package].executor": "Run",
-    "Maven.plagiarism-app [clean].executor": "Run",
-    "Maven.plagiarism-app [install].executor": "Run",
-    "Maven.plagiarism-core [clean,compile].executor": "Run",
-    "Maven.plagiarism-core [clean,install].executor": "Run",
-    "Maven.plagiarism-core [compile].executor": "Run",
-    "Maven.plagiarism-languages [clean,install].executor": "Run",
-    "Maven.plagiarism-work [clean,install].executor": "Run",
-    "Maven.plagiarism-work [compile].executor": "Run",
-    "Maven.plagiarism-work [deploy].executor": "Run",
-    "Maven.python3 [clean,install].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.PlagiarismAppApplication.executor": "Run",
-    "git-widget-placeholder": "master",
-    "go.import.settings.migrated": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "openjdk-21",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Vitaliy/IDEA/plagiarism-work/devkit/src/main/java/com/example/content",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-core [clean,compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-core [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-core [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-work [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.PlagiarismAppApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;fixcomparison&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/MyScripts/2nd_course_work/plagiarism2/plagiarism-languages/java8/src/main/antlr4/java8&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\MyScripts\2nd_course_work\plagiarism2\plagiarism-languages\java8\src\main\antlr4\java8" />
       <recent name="E:\Vitaliy\IDEA\plagiarism-work\devkit\src\main\java\com\example\content" />
       <recent name="E:\Vitaliy\IDEA\plagiarism-work\plagiarism-app\src\main\java\com\example\plagiarismapp\controller" />
       <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\java\go\grammar" />
       <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\java" />
-      <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\antlr4" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\SpringProject\Project\plagiarism\deploy" />
-      <recent name="D:\SpringProject\Project\plagiarism\plagiarism-app\src\main\resources\db" />
       <recent name="E:\Vitaliy\IDEA\plagiarism-work\src\main\java\org\example\content" />
       <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\antlr4\go" />
     </key>
@@ -161,10 +139,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="plagiarism-app-0.0.1-SNAPSHOT.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/plagiarism-app/target/plagiarism-app-0.0.1-SNAPSHOT.jar" />
-      <method v="2" />
-    </configuration>
     <configuration name="PlagiarismAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="plagiarism-app" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.plagiarismapp.PlagiarismAppApplication" />
@@ -172,18 +146,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="deploy/docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="deploy/docker-compose.yaml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.deploy/docker-compose.yaml: Compose Deployment" />
-        <item itemvalue="JAR Application.plagiarism-app-0.0.1-SNAPSHOT.jar" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -191,8 +156,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
       </set>
     </attachedChunks>
   </component>
@@ -215,7 +180,11 @@
       <workItem from="1745681803502" duration="3965000" />
       <workItem from="1746098771719" duration="9796000" />
       <workItem from="1746190118716" duration="6020000" />
-      <workItem from="1746665208755" duration="13247000" />
+      <workItem from="1746261403246" duration="28000" />
+      <workItem from="1746275444816" duration="5349000" />
+      <workItem from="1746522587005" duration="5575000" />
+      <workItem from="1746544572753" duration="5578000" />
+      <workItem from="1746614103947" duration="15812000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -249,23 +218,31 @@
       <option name="project" value="LOCAL" />
       <updated>1745424928963</updated>
     </task>
-    <task id="LOCAL-00005" summary="web v1.1">
+    <task id="LOCAL-00005" summary="ручка для сравнения">
       <option name="closed" value="true" />
-      <created>1746667088480</created>
+      <created>1746197819759</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1746667088480</updated>
+      <updated>1746197819759</updated>
     </task>
-    <task id="LOCAL-00006" summary="web v1.1 fix">
+    <task id="LOCAL-00006" summary="пофиксил алгоритм - теперь вроде нормально сравнивает. Правда только для cpp, python и go. На Java виснет">
       <option name="closed" value="true" />
-      <created>1746669340486</created>
+      <created>1746297739241</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1746669340486</updated>
+      <updated>1746297739241</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Поправил лексер для Java. Теперь на Java не падает и впринципе на больших репозиториях не должно падать">
+      <option name="closed" value="true" />
+      <created>1746362117610</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1746362117610</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,62 +265,15 @@
     </ignored-roots>
     <MESSAGE value="init" />
     <MESSAGE value="add support of languages&#10;- add python, c++, go" />
-    <MESSAGE value="web v1.1" />
-    <MESSAGE value="web v1.1 fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="web v1.1 fix" />
+    <MESSAGE value="resolve conflict" />
+    <MESSAGE value="ручка для сравнения" />
+    <MESSAGE value="поправил баг" />
+    <MESSAGE value="пофиксил алгоритм - теперь вроде нормально сравнивает. Правда только для cpp, python и go. На Java виснет" />
+    <MESSAGE value="Поправил лексер для Java. Теперь на Java не падает и впринципе на больших репозиториях не должно падать" />
+    <option name="LAST_COMMIT_MESSAGE" value="Поправил лексер для Java. Теперь на Java не падает и впринципе на больших репозиториях не должно падать" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
     <settings-migrated>true</settings-migrated>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
-          <line>33</line>
-          <properties class="com.example.plagiarismapp.service.RepositoryService" method="getSuspiciousFiles">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
-          <line>47</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

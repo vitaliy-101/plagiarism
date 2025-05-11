@@ -16,25 +16,26 @@ public class PythonNormalization implements Normalization {
             TokenInfo token = tokens.get(i);
             String newNorm = "default";
 
-            if (token.type == PythonLexer.COMMENT ||
-                    token.type == PythonLexer.STRING && i > 0 && tokens.get(i - 1).type == PythonLexer.INDENT) {
+            if (token.getType() == PythonLexer.COMMENT ||
+                    token.getType() == PythonLexer.STRING && i > 0 && tokens.get(i - 1).getType() == PythonLexer.INDENT) {
                 Instant instant = Instant.now();
                 long timeStampMillis = instant.toEpochMilli();
                 newNorm = "comment_" + Math.abs(timeStampMillis);
             }
-            else if (token.type == PythonLexer.NAME) {
+            else if (token.getType() == PythonLexer.NAME) {
                 newNorm = "id";
 
                 // 1. Импорты: import os
-                if (i > 0 && (tokens.get(i - 1).type == PythonLexer.IMPORT || tokens.get(i - 1).type == PythonLexer.FROM)) {
-                    int currLine = tokens.get(i - 1).line;
-                    while (tokens.get(i).line == currLine) {
-                        if (tokens.get(i).type != PythonLexer.IMPORT){
+                if (i > 0 && (tokens.get(i - 1).getType() == PythonLexer.IMPORT || tokens.get(i - 1).getType() == PythonLexer.FROM)) {
+                    int currLine = tokens.get(i - 1).getLine();
+                    while (tokens.get(i).getLine() == currLine) {
+                        if (tokens.get(i).getType() != PythonLexer.IMPORT){
                             Instant instant = Instant.now();
                             long timeStampMillis = instant.toEpochMilli();
-                            newNorm = "lib_" + token.text + Math.abs(timeStampMillis);
+                            newNorm = "lib_" + token.getText() + Math.abs(timeStampMillis);
                         }
-                        tokens.set(i, new TokenInfo(token.text, token.type, token.line, token.column, newNorm));
+                        tokens.set(i, new TokenInfo(token.getText(), token.getType(), token.getLine(),
+                                token.getColumn(), token.getLength(), newNorm));
                         i++;
                     }
                     i--;
@@ -42,14 +43,14 @@ public class PythonNormalization implements Normalization {
 
                 // 2. До скобок без точки — вызов функции
                 else if (i + 1 < tokens.size() &&
-                        tokens.get(i + 1).type == PythonLexer.LPAR &&
-                        (i == 0 || !Objects.equals(tokens.get(i - 1).text, "."))) {
-                    newNorm = "func" + token.text;
+                        tokens.get(i + 1).getType() == PythonLexer.LPAR &&
+                        (i == 0 || !Objects.equals(tokens.get(i - 1).getText(), "."))) {
+                    newNorm = "func" + token.getText();
                 }
 
                 // 3. После точки — член объекта
-                else if (i > 0 && Objects.equals(tokens.get(i - 1).text, ".")) {
-                    newNorm = "member" + token.text;
+                else if (i > 0 && Objects.equals(tokens.get(i - 1).getText(), ".")) {
+                    newNorm = "member" + token.getText();
                 }
 
                 // 4. По умолчанию — переменная
@@ -57,19 +58,20 @@ public class PythonNormalization implements Normalization {
                     newNorm = "var";
                 }
 
-            } else if (token.type == PythonLexer.STRING) {
+            } else if (token.getType() == PythonLexer.STRING) {
                 newNorm = "string_lit";
-            } else if (token.type == PythonLexer.NUMBER) {
+            } else if (token.getType() == PythonLexer.NUMBER) {
                 newNorm = "number_lit";
-            } else if (token.type == PythonLexer.NONE) {
+            } else if (token.getType() == PythonLexer.NONE) {
                 newNorm = "null_lit";
-            } else if (token.type == PythonLexer.TRUE || token.type == PythonLexer.FALSE) {
+            } else if (token.getType() == PythonLexer.TRUE || token.getType() == PythonLexer.FALSE) {
                 newNorm = "boolean_lit";
             } else {
                 continue;
             }
 
-            tokens.set(i, new TokenInfo(token.text, token.type, token.line, token.column, newNorm));
+            tokens.set(i, new TokenInfo(token.getText(), token.getType(), token.getLine(),
+                    token.getColumn(), token.getLength(), newNorm));
         }
 
         return tokens;
