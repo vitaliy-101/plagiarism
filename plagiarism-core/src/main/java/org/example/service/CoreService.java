@@ -99,7 +99,7 @@ public class CoreService {
             }).toList());
         } catch (Exception e) {
             System.out.println("EXCEPTION!!!");
-            e.printStackTrace(); // Добавим вывод стека для отладки
+            e.printStackTrace();
         }
         System.out.println("SUCCESS COMPARE 2 FILES");
         System.out.println("END NAMES: " + file1.getFilename() + "; " + file2.getFilename());
