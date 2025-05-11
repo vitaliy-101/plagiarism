@@ -158,10 +158,10 @@ public class ProjectService {
             y.getSimilarityParts().forEach(z -> {
                 Tile tile = new Tile();
                 tile.setMatch(match);
-                tile.setStartLineInFirstFile(z.getStartLineInFirstFile());
-                tile.setStartLineInFirstFile(z.getStartLineInSecondFile());
-                tile.setEndLineInFirstFile(z.getEndLineInFirstFile());
-                tile.setEndLineInSecondFile(z.getEndLineInSecondFile());
+                tile.setStartLineInFirstFile((long) z.getStartLineInFirstFile());
+                tile.setStartLineInSecondFile((long) z.getStartLineInSecondFile());
+                tile.setEndLineInFirstFile((long) z.getEndLineInFirstFile());
+                tile.setEndLineInSecondFile((long)z.getEndLineInSecondFile());
                 tile.setTextInFirstFile(z.getSimilarFragmentInFirstFile());
                 tile.setTextInSecondFile(z.getSimilarFragmentInSecondFile());
                 tiles.add(tile);

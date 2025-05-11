@@ -117,7 +117,7 @@ public class CoreService {
         return tokenNames;
     }
 
-    private String getSimilarFragmentString(FileContent file, int startLine,
+    private String getSimilarFragmentString(FileContentUtil file, int startLine,
                                             int endLine, int contextLength) {
         StringBuilder result = new StringBuilder();
         String[] fileContent = file.getContent().split("\n");
