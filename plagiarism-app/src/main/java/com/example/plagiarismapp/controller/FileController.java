@@ -18,9 +18,12 @@ public class FileController {
     private final FileService fileService;
     private final FileProjectMapper fileProjectMapper;
 
-    @GetMapping("/suspicious/file/{projectId}/{fileId}")
-    public List<MatchResponse> getSuspiciousForFile(@PathVariable("projectId") Long projectId, @PathVariable("fileId") Long fileId) {
-        return fileService.getSuspiciousForFile(projectId, fileId);
+    @GetMapping("/suspicious/file/{fileId}/{firstRepositoryId}/{secondRepositoryId}")
+    public List<MatchResponse> getSuspiciousForFile(@PathVariable("fileId") Long fileId,
+                                                    @PathVariable("firstRepositoryId") Long firstRepositoryId,
+                                                    @PathVariable("secondRepositoryId") Long secondRepositoryId) {
+
+        return fileService.getSuspiciousForFile(fileId, firstRepositoryId, secondRepositoryId);
     }
 
     @GetMapping("file/{repositoryId}/{fileId}")

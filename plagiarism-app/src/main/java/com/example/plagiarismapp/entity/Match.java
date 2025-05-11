@@ -35,6 +35,13 @@ public class Match {
     @JoinColumn(name = "second_file_id")
     private FileProject secondFile;
 
+    @ManyToOne
+    @JoinColumn(name = "first_repository_id")
+    private RepositoryProject firstRepository;
+
+    @ManyToOne
+    @JoinColumn(name = "second_repository_id")
+    private RepositoryProject secondRepository;
 
     @ManyToOne
     @JoinColumn(name = "project_id")

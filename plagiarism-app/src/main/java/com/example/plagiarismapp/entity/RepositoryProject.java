@@ -41,6 +41,4 @@ public class RepositoryProject {
     @JoinColumn(name = "project_id")
     private Project project;
 
-
-
 }

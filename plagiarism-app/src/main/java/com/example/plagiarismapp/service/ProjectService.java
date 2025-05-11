@@ -2,6 +2,7 @@ package com.example.plagiarismapp.service;
 
 import com.example.content.*;
 import com.example.plagiarismapp.dto.request.project.ProjectCreateRequest;
+import com.example.plagiarismapp.dto.request.project.RepositoryMatchResponse;
 import com.example.plagiarismapp.entity.*;
 import com.example.plagiarismapp.entity.status.ProjectStatus;
 import com.example.plagiarismapp.exception.NotFoundByIdException;
@@ -19,8 +20,7 @@ import reactor.core.scheduler.Schedulers;
 import reactor.util.function.Tuples;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -150,6 +150,8 @@ public class ProjectService {
             match.setSecondFile(fileSecond);
             match.setPercentage(y.getSimilarity());
 
+            match.setFirstRepository(fileFirst.getRepository());
+            match.setSecondRepository(fileSecond.getRepository());
             match.setProject(project);
 
             List<Tile> tiles = new ArrayList<>();
@@ -209,14 +211,6 @@ public class ProjectService {
 
     }
 
-    public List<Match> getAllMatches(Long userId, Long projectId) {
-        var project = projectRepository.findById(projectId).orElseThrow(
-                () -> new NotFoundByIdException(Project.class, projectId));
-        if (!project.getUser().getId().equals(userId)) {
-            throw new NotFoundResourceByIdException(User.class, userId, Project.class, projectId);
-        }
-        return project.getMatches();
-    }
 
     public List<RepositoryProject> getAllRepositories(Long userId, Long projectId) {
         var project = projectRepository.findById(projectId).orElseThrow(
@@ -271,6 +265,37 @@ public class ProjectService {
                 () -> new NotFoundByIdException(Project.class, projectId));
     }
 
+    public List<RepositoryMatchResponse> getAllMatchRepository(Long userId, Long projectId) {
+        var project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new NotFoundByIdException(Project.class, projectId));
 
+        if (!project.getUser().getId().equals(userId)) {
+            throw new NotFoundResourceByIdException(User.class, userId, Project.class, projectId);
+        }
 
+        return matchRepository.findAllByProjectId(projectId)
+                .stream()
+                .collect(Collectors.groupingBy(
+                        match -> {
+                            Long id1 = match.getFirstRepository().getId();
+                            Long id2 = match.getSecondRepository().getId();
+                            return id1 < id2 ? id1 + "-" + id2 : id2 + "-" + id1;
+                        },
+                        Collectors.maxBy(Comparator.comparingDouble(Match::getPercentage))
+                ))
+                .values()
+                .stream()
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(match -> {
+                    RepositoryMatchResponse response = new RepositoryMatchResponse();
+                    response.setFirstRepositoryId(match.getFirstRepository().getId());
+                    response.setFirstRepositoryOwner(match.getFirstRepository().getOwner());
+                    response.setSecondRepositoryId(match.getSecondRepository().getId());
+                    response.setSecondRepositoryOwner(match.getSecondRepository().getOwner());
+                    response.setPercentage(match.getPercentage());
+                    return response;
+                })
+                .collect(Collectors.toList());
+    }
 }

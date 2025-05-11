@@ -44,10 +44,14 @@ create table if not exists matches (
     percentage FLOAT not null,
     first_file_id BIGINT,
     second_file_id BIGINT,
+    first_repository_id BIGINT,
+    second_repository_id BIGINT,
     project_id BIGINT,
     CONSTRAINT pk_matches PRIMARY KEY (id),
     CONSTRAINT fk_matches_first_file FOREIGN KEY (first_file_id) REFERENCES files(id) ON DELETE CASCADE,
     CONSTRAINT fk_matches_second_file FOREIGN KEY (second_file_id) REFERENCES files(id) ON DELETE CASCADE,
+    CONSTRAINT fk_matches_first_repository FOREIGN KEY (first_repository_id) REFERENCES repositories(id) ON DELETE CASCADE,
+    CONSTRAINT fk_matches_second_repository FOREIGN KEY (second_repository_id) REFERENCES repositories(id) ON DELETE CASCADE,
     CONSTRAINT fk_matches_project FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
 );
 

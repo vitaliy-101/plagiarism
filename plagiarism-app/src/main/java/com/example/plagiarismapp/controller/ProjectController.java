@@ -2,7 +2,8 @@ package com.example.plagiarismapp.controller;
 
 import com.example.plagiarismapp.dto.request.project.ProjectCreateRequest;
 
-import com.example.plagiarismapp.dto.response.match.SmallMatchResponse;
+import com.example.plagiarismapp.dto.request.project.RepositoryMatchResponse;
+
 import com.example.plagiarismapp.dto.response.project.SmallProjectResponse;
 import com.example.plagiarismapp.dto.response.repository.SmallRepositoryResponse;
 import com.example.plagiarismapp.dto.response.statistic.StatisticRepositoryResponse;
@@ -44,14 +45,15 @@ public class ProjectController {
         return projectMapper.smallProjectResponseFromEntity(projectService.getProject(userId, projectId));
     }
 
-    @GetMapping("match/all/{userId}/{projectId}")
-    public List<SmallMatchResponse> getAllMatches(@PathVariable("userId") Long userId, @PathVariable("projectId") Long projectId) {
-        return matchMapper.listSmallMatchResponseFromListMatch(projectService.getAllMatches(userId, projectId));
-    }
 
     @GetMapping("repository/all/{userId}/{projectId}")
     public List<SmallRepositoryResponse> getAllRepositories(@PathVariable("userId") Long userId, @PathVariable("projectId") Long projectId) {
         return repositoryMapper.listSmallRepositoryResponseFromListEntity(projectService.getAllRepositories(userId, projectId));
+    }
+
+    @GetMapping("all/match/repository/{userId}/{projectId}")
+    public List<RepositoryMatchResponse> getAllMatchRepository(@PathVariable("userId") Long userId, @PathVariable("projectId") Long projectId) {
+        return projectService.getAllMatchRepository(userId, projectId);
     }
 
     @DeleteMapping("/delete/{userId}/{projectId}")

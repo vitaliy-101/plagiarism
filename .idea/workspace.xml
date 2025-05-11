@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="web v1.1" />
+    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="web v1.1 fix">
+      <change afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/dto/request/project/RepositoryMatchResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/FileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/RepositoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/controller/RepositoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/RepositoryProject.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/entity/RepositoryProject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/repository/MatchRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/repository/MatchRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/FileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/FileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/ProjectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/resources/db/migration/V1_1_0__Init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/resources/db/migration/V1_1_0__Init.sql" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,6 +125,9 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Vitaliy\IDEA\plagiarism-work\devkit\src\main\java\com\example\content" />
@@ -198,7 +215,7 @@
       <workItem from="1745681803502" duration="3965000" />
       <workItem from="1746098771719" duration="9796000" />
       <workItem from="1746190118716" duration="6020000" />
-      <workItem from="1746665208755" duration="2676000" />
+      <workItem from="1746665208755" duration="13247000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -240,7 +257,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746667088480</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="web v1.1 fix">
+      <option name="closed" value="true" />
+      <created>1746669340486</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1746669340486</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,10 +289,61 @@
     <MESSAGE value="init" />
     <MESSAGE value="add support of languages&#10;- add python, c++, go" />
     <MESSAGE value="web v1.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="web v1.1" />
+    <MESSAGE value="web v1.1 fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="web v1.1 fix" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
+          <line>33</line>
+          <properties class="com.example.plagiarismapp.service.RepositoryService" method="getSuspiciousFiles">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/RepositoryService.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

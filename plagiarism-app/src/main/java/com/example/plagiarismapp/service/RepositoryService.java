@@ -1,10 +1,12 @@
 package com.example.plagiarismapp.service;
 
 import com.example.plagiarismapp.dto.response.file.SuspiciousFileResponse;
+import com.example.plagiarismapp.entity.Match;
 import com.example.plagiarismapp.entity.Project;
 import com.example.plagiarismapp.entity.RepositoryProject;
 import com.example.plagiarismapp.exception.NotFoundByIdException;
 import com.example.plagiarismapp.exception.NotFoundResourceByIdException;
+import com.example.plagiarismapp.repository.MatchRepository;
 import com.example.plagiarismapp.repository.ProjectRepository;
 import com.example.plagiarismapp.repository.RepositoryProjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,38 +27,36 @@ public class RepositoryService {
 
     private final ProjectRepository projectRepository;
     private final RepositoryProjectRepository repositoryProjectRepository;
+    private final MatchRepository matchRepository;
 
 
 
-    public List<SuspiciousFileResponse> getSuspiciousFiles(Long projectId, Long repositoryId) {
-        var project = projectRepository.findById(projectId).orElseThrow(
+    public List<SuspiciousFileResponse> getSuspiciousFiles(Long projectId, Long firstRepositoryId, Long secondRepositoryId) {
+        projectRepository.findById(projectId).orElseThrow(
                 () -> new NotFoundByIdException(Project.class, projectId));
-        repositoryProjectRepository.findById(repositoryId).orElseThrow(
+        repositoryProjectRepository.findById(firstRepositoryId).orElseThrow(
                 () -> new NotFoundResourceByIdException(RepositoryProject.class, projectId,
-                        RepositoryProject.class, repositoryId));
+                        RepositoryProject.class, firstRepositoryId));
+        repositoryProjectRepository.findById(secondRepositoryId).orElseThrow(
+                () -> new NotFoundResourceByIdException(RepositoryProject.class, projectId,
+                        RepositoryProject.class, secondRepositoryId));
 
         Set<SuspiciousFileResponse> result = new HashSet<>();
 
-        project.getMatches()
+        List<Match> matches = matchRepository.findByFirstRepositoryIdAndSecondRepositoryId(
+                firstRepositoryId, secondRepositoryId);
+        matches
                 .stream()
-                .filter(x -> x.getPercentage() >= 0.8 &&
-                        ((x.getFirstFile().getRepository().getId().equals(repositoryId)
-                                && !x.getSecondFile().getRepository().getId().equals(repositoryId)) ||
-                        (x.getSecondFile().getRepository().getId().equals(repositoryId)
-                                && !x.getFirstFile().getRepository().getId().equals(repositoryId))))
-                .map(x -> {
-                    SuspiciousFileResponse response = new SuspiciousFileResponse();
-                    if (x.getFirstFile().getRepository().getId().equals(repositoryId)) {
-                        response.setId(x.getFirstFile().getId());
-                        response.setName(x.getFirstFile().getFilename());
-                    } else {
-                        response.setId(x.getSecondFile().getId());
-                        response.setName(x.getSecondFile().getFilename());
-                    }
+                .filter(x -> x.getPercentage() >= 0.8)
+                        .map(x -> {
+                            SuspiciousFileResponse response = new SuspiciousFileResponse();
 
-                    return response;
-                })
-                .forEach(result::add);
+                            response.setId(x.getFirstFile().getId());
+                            response.setName(x.getFirstFile().getFilename());
+
+                            return response;
+                        })
+                        .forEach(result::add);
 
         return result.stream().toList();
     }

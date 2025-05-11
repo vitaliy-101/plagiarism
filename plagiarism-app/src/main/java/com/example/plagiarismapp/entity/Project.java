@@ -39,6 +39,4 @@ public class Project {
     @OneToOne(mappedBy = "project")
     private Statistic statistic;
 
-    @OneToMany(mappedBy = "project")
-    private List<Match> matches;
 }

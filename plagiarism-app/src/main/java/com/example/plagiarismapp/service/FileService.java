@@ -3,11 +3,13 @@ package com.example.plagiarismapp.service;
 import com.example.plagiarismapp.dto.response.match.MatchResponse;
 import com.example.plagiarismapp.dto.response.match.TileResponse;
 import com.example.plagiarismapp.entity.FileProject;
+import com.example.plagiarismapp.entity.Match;
 import com.example.plagiarismapp.entity.Project;
 import com.example.plagiarismapp.entity.RepositoryProject;
 import com.example.plagiarismapp.exception.NotFoundByIdException;
 import com.example.plagiarismapp.exception.NotFoundResourceByIdException;
 import com.example.plagiarismapp.repository.FileProjectRepository;
+import com.example.plagiarismapp.repository.MatchRepository;
 import com.example.plagiarismapp.repository.ProjectRepository;
 import com.example.plagiarismapp.repository.RepositoryProjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ public class FileService {
     private final ProjectRepository projectRepository;
     private final FileProjectRepository fileRepository;
     private final RepositoryProjectRepository repositoryRepository;
+    private final MatchRepository matchRepository;
 
     private FileProject checkFileExistAndGet(Long repositoryId, Long fileId) {
         var file = fileRepository.findById(fileId).orElseThrow(() -> new NotFoundByIdException(FileProject.class, fileId));
@@ -36,18 +39,26 @@ public class FileService {
         }
     }
 
-    public List<MatchResponse> getSuspiciousForFile(Long projectId, Long fileId) {
-        var project = projectRepository.findById(projectId).orElseThrow(
-                () -> new NotFoundByIdException(Project.class, projectId));
-        fileRepository.findById(fileId).orElseThrow(
+    public List<MatchResponse> getSuspiciousForFile(Long fileId, Long firstRepositoryId, Long secondRepositoryId) {
+
+        var file = fileRepository.findById(fileId).orElseThrow(
                 () -> new NotFoundByIdException(File.class, fileId));
+        var firstRepository = repositoryRepository.findById(firstRepositoryId).orElseThrow(
+                () -> new NotFoundByIdException(RepositoryProject.class, firstRepositoryId));
+        var secondRepository = repositoryRepository.findById(secondRepositoryId).orElseThrow(
+                () -> new NotFoundByIdException(RepositoryProject.class, secondRepositoryId));
+
+        if (!file.getRepository().getId().equals(firstRepository.getId())) {
+            throw new NotFoundResourceByIdException(RepositoryProject.class, firstRepositoryId, FileProject.class, fileId);
+        }
 
         List<MatchResponse> result = new ArrayList<>();
 
-        project.getMatches()
-                .stream()
-                .filter(x -> x.getPercentage() >= 0.8 && x.getFirstFile().getId().equals(fileId)
-                        || x.getSecondFile().getId().equals(fileId))
+        List<Match> matches = matchRepository.findByFirstRepositoryIdAndSecondRepositoryId(firstRepositoryId, secondRepositoryId);
+
+        matches.
+                stream()
+                .filter(x -> x.getFirstFile().getId().equals(fileId) || x.getSecondFile().getId().equals(fileId))
                 .map(x -> {
                     MatchResponse response = new MatchResponse();
                     response.setId(x.getId());
