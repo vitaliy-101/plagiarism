@@ -74,7 +74,7 @@ public class CoreService {
         try {
             GreedyStringTiling greedyStringTiling = new GreedyStringTiling();
             PlagResult res = greedyStringTiling.run(submission1, submission2, 9, 0.4f);
-            result.setSimilarity((double) Math.round(res.getSimilarity()));
+            result.setSimilarity((double) Math.round(res.getSimilarity() * 100.0) / 100.0);
             result.setSimilarityParts(res.getTiles().stream().map(t -> {
                 SimilarityPart part = new SimilarityPart();
 

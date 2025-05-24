@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="web v1.1" />
+    <list default="true" id="f0c35166-594c-4584-bd6b-8e7066e2498b" name="Changes" comment="web v1.1">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deploy/plagiarism-core-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-app/src/main/java/com/example/plagiarismapp/service/ProjectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/GSTHashTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/GSTHashTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/GreedyStringTiling.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/GreedyStringTiling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/PlagResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/PlagResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/SimilarityCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/SimilarityCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/StringLengths.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/gst/StringLengths.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/service/CoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/plagiarism-core/src/main/java/org/example/service/CoreService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,7 +50,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
-    "url": "https://github.com/vitaliy-101/plagiarism.git",
+    "url": "https://github.com/GusevEgor/plagiarism.git",
     "accountId": "b6ab72b0-8b9a-44a4-9c75-0b3ba58eba2c"
   }
 }]]></component>
@@ -62,55 +73,55 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Docker.deploy/docker-compose.yaml: Compose Deployment.executor": "Run",
-    "JAR Application.plagiarism-app-0.0.1-SNAPSHOT.jar.executor": "Run",
-    "Maven.devkit [clean,install].executor": "Run",
-    "Maven.go [clean,install].executor": "Run",
-    "Maven.java8 [clean,install].executor": "Run",
-    "Maven.plagiarism-app [clean,install].executor": "Run",
-    "Maven.plagiarism-app [clean,package].executor": "Run",
-    "Maven.plagiarism-app [clean].executor": "Run",
-    "Maven.plagiarism-app [install].executor": "Run",
-    "Maven.plagiarism-core [clean,compile].executor": "Run",
-    "Maven.plagiarism-core [clean,install].executor": "Run",
-    "Maven.plagiarism-core [compile].executor": "Run",
-    "Maven.plagiarism-languages [clean,install].executor": "Run",
-    "Maven.plagiarism-work [clean,install].executor": "Run",
-    "Maven.plagiarism-work [compile].executor": "Run",
-    "Maven.plagiarism-work [deploy].executor": "Run",
-    "Maven.python3 [clean,install].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.PlagiarismAppApplication.executor": "Run",
-    "git-widget-placeholder": "master",
-    "go.import.settings.migrated": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "openjdk-21",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Vitaliy/IDEA/plagiarism-work/devkit/src/main/java/com/example/content",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.deploy/docker-compose.yaml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.plagiarism-app-0.0.1-SNAPSHOT.jar.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.devkit [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.go [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.java8 [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-app [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-app [clean,package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-app [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-app [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-core [clean,compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-core [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-core [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-languages [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-work [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-work [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.plagiarism-work [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.python3 [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.PlagiarismAppApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Vitaliy/IDEA/plagiarism-work/devkit/src/main/java/com/example/content&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Vitaliy\IDEA\plagiarism-work\devkit\src\main\java\com\example\content" />
@@ -120,6 +131,7 @@
       <recent name="D:\MyScripts\2nd_course_work\plagiarism\plagiarism-languages\go\src\main\antlr4" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\SpringProject\Project\plagiarism-sin\deploy" />
       <recent name="D:\SpringProject\Project\plagiarism\deploy" />
       <recent name="D:\SpringProject\Project\plagiarism\plagiarism-app\src\main\resources\db" />
       <recent name="E:\Vitaliy\IDEA\plagiarism-work\src\main\java\org\example\content" />
@@ -199,6 +211,7 @@
       <workItem from="1746098771719" duration="9796000" />
       <workItem from="1746190118716" duration="6020000" />
       <workItem from="1746665208755" duration="2676000" />
+      <workItem from="1748118814477" duration="1447000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />

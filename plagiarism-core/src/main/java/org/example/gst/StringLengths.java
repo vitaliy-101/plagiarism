@@ -1,10 +1,5 @@
 package org.example.gst;
 
-/**
- * The length of the strings are stored
- * @author arunjayapal
- *
- */
 public class StringLengths {
     public final int id1StringLength;
     public final int id2StringLength;

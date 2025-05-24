@@ -176,10 +176,10 @@ public class ProjectService {
         statistic.setNumberOfRepositories((long)project.getRepositories().size());
         statistic.setNumberOfFiles(project.getRepositories().stream().mapToLong(x -> x.getFiles().size()).sum());
 
-        statistic.setAverageSimilarity(
-                allCompare.stream().flatMap(x -> x.getCompareFiles().stream())
-                                .mapToDouble(CompareTwoFilesDto::getSimilarity)
-                                        .average().orElse(0.0));
+        Double avgSim = allCompare.stream().flatMap(x -> x.getCompareFiles().stream())
+                .mapToDouble(CompareTwoFilesDto::getSimilarity)
+                .average().orElse(0.0);
+        statistic.setAverageSimilarity(Math.round(avgSim * 100.0) / 100.0);
 
         statistic.setMaxSimilarity(
                 allCompare.stream()
