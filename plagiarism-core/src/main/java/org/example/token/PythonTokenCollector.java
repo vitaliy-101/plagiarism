@@ -1,14 +1,16 @@
 package org.example.token;
 
-import com.example.content.Language;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.*;
-
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.antlr.v4.runtime.tree.TerminalNode;
 import org.example.token.strategy.TokenCollector;
-import python3.grammar.*;
+import python3.grammar.PythonLexer;
+import python3.grammar.PythonParser;
+import python3.grammar.PythonParserBaseListener;
 
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 

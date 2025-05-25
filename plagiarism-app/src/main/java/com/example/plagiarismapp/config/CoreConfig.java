@@ -1,6 +1,6 @@
 package com.example.plagiarismapp.config;
 
-import org.example.service.CoreService;
+import org.example.service.CoreServiceReactive;
 import org.example.token.strategy.TokenCollectorManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ public class CoreConfig {
     }
 
     @Bean
-    public CoreService coreService(TokenCollectorManager tokenCollectorManager) {
-        return new CoreService(tokenCollectorManager);
+    public CoreServiceReactive coreServiceReactive(TokenCollectorManager tokenCollectorManager) {
+        return new CoreServiceReactive(tokenCollectorManager);
     }
 }

@@ -12,7 +12,7 @@ import com.example.plagiarismapp.repository.*;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.service.CoreService;
+import org.example.service.CoreServiceReactive;
 import org.springframework.stereotype.Service;
 
 import reactor.core.publisher.Mono;
@@ -27,7 +27,7 @@ import static java.util.stream.Collectors.toList;
 @Slf4j
 public class ProjectService {
     private final GitService gitService;
-    private final CoreService coreService;
+    private final CoreServiceReactive coreServiceReactive;
     private final FileProjectRepository fileRepository;
     private final RepositoryProjectRepository repositoryProjectRepository;
     private final ProjectRepository projectRepository;
@@ -127,7 +127,7 @@ public class ProjectService {
                 repositoryContent2.setFiles(files2);
                 repositoryContent2.setLanguage(repositoryProjects.get(j).getLanguage());
                 Mono<CompareTwoRepositoryDto> compareResult =
-                        coreService.compareRepositoriesReactive(repositoryContent1, repositoryContent2);
+                        coreServiceReactive.compareRepositoriesReactive(repositoryContent1, repositoryContent2);
 
 
                 allCompare.add(compareResult.block());

@@ -1,20 +1,19 @@
 package org.example.token;
 
-import com.example.content.Language;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.*;
-
-import cpp14.grammar.*;
+import cpp14.grammar.CPP14Lexer;
+import cpp14.grammar.CPP14Parser;
+import cpp14.grammar.CPP14ParserBaseListener;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.antlr.v4.runtime.tree.TerminalNode;
 import org.example.token.strategy.TokenCollector;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 
 public class CppTokenCollector extends CPP14ParserBaseListener implements TokenCollector {
     public List<TokenInfo> tokens = new ArrayList<>();

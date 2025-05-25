@@ -21,20 +21,15 @@ public class GitService {
     private static final String TEMP_DIR_PREFIX = "repo_";
 
     public RepositoryContent downloadRepository(String url, Language language) throws Exception {
-        // 1. Создаем временную директорию
         var tempDir = Files.createTempDirectory(TEMP_DIR_PREFIX);
 
         try {
-            // 2. Клонируем репозиторий с помощью JGit
             var git = Git.cloneRepository()
                     .setURI(url)
                     .setDirectory(tempDir.toFile())
                     .call();
-
-            // 3. Закрываем Git-ресурс
             git.close();
 
-            // 4. Собираем все файлы с нужным расширением
             var files = collectFiles(tempDir, language);
 
             return new RepositoryContent(
@@ -45,7 +40,6 @@ public class GitService {
                     language
             );
         } finally {
-            // 5. Удаляем временную директорию
             FileUtils.deleteDirectory(tempDir.toFile());
         }
     }

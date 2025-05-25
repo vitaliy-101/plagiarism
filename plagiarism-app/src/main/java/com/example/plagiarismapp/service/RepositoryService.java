@@ -11,7 +11,6 @@ import com.example.plagiarismapp.repository.ProjectRepository;
 import com.example.plagiarismapp.repository.RepositoryProjectRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.service.CoreService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -22,9 +21,6 @@ import java.util.Set;
 @Slf4j
 @RequiredArgsConstructor
 public class RepositoryService {
-    private final GitService gitService;
-    private final CoreService coreService;
-
     private final ProjectRepository projectRepository;
     private final RepositoryProjectRepository repositoryProjectRepository;
     private final MatchRepository matchRepository;
