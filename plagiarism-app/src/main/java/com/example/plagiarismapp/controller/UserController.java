@@ -9,6 +9,7 @@ import com.example.plagiarismapp.mapper.UserMapper;
 import com.example.plagiarismapp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -21,18 +22,18 @@ public class UserController {
     private final ProjectMapper projectMapper;
 
     @PostMapping("/create")
-    public UserResponse createUser(@RequestBody UserRequest request) {
-        return userMapper.userResponseFromEntity(userService.createUser(request));
+    public Mono<UserResponse> createUser(@RequestBody UserRequest request) {
+        return userMapper.userResponseFromMono(userService.createUser(request));
     }
 
     @GetMapping("/all/project")
-    public List<SmallProjectResponse> getAllProject(@RequestParam("userId") Long userId) {
-        return projectMapper.listSmallProjectResponseFromEntity(userService.getAllProject(userId));
+    public Mono<List<SmallProjectResponse>> getAllProject(@RequestParam("userId") Long userId) {
+        return projectMapper.listSmallProjectResponseFromMono(userService.getAllProjects(userId));
     }
 
     @DeleteMapping("/delete/{userId}")
-    public void deleteUser(@PathVariable("userId") Long userId) {
-        userService.deleteUser(userId);
+    public Mono<Void> deleteUser(@PathVariable("userId") Long userId) {
+        return userService.deleteUser(userId);
     }
 
 }

@@ -1,35 +1,35 @@
 package com.example.plagiarismapp.entity;
 
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 
-@Entity
 @Table(name = "files")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class FileProject {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "full_filename")
+    @Column("full_filename")
     private String fullFilename;
 
-    @Column(name = "filename")
+    @Column("filename")
     private String filename;
 
-    @Column(name = "content")
+    @Column("content")
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "repository_id")
-    private RepositoryProject repository;
-
+    @Column("repository_id")
+    private Long repositoryId;
 }

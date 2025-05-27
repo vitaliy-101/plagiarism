@@ -43,7 +43,9 @@ create table if not exists matches (
     id BIGSERIAL,
     percentage FLOAT not null,
     first_file_id BIGINT,
+    first_file_name varchar(255) not null,
     second_file_id BIGINT,
+    second_file_name varchar(255) not null,
     first_repository_id BIGINT,
     second_repository_id BIGINT,
     project_id BIGINT,
@@ -63,6 +65,11 @@ create table if not exists tiles (
     end_line_in_second_file BIGINT,
     text_in_first_file TEXT,
     text_in_second_file TEXT,
+    text_after_context_in_first_file TEXT,
+    text_after_context_in_second_file TEXT,
+    text_before_context_in_first_file TEXT,
+    text_before_context_in_second_file TEXT,
+
     match_id BIGINT,
     CONSTRAINT pk_tiles PRIMARY KEY (id),
     CONSTRAINT fk_tiles_match FOREIGN KEY (match_id) REFERENCES matches(id) ON DELETE CASCADE

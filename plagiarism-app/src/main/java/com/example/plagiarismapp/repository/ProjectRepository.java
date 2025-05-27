@@ -1,11 +1,17 @@
 package com.example.plagiarismapp.repository;
 
 import com.example.plagiarismapp.entity.Project;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 
-public interface ProjectRepository extends JpaRepository<Project, Long> {
+import org.springframework.data.r2dbc.repository.Query;
+import org.springframework.data.r2dbc.repository.R2dbcRepository;
+import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 
-    List<Project> findAllByUserId(Long userId);
+@Repository
+public interface ProjectRepository extends R2dbcRepository<Project, Long> {
+
+    @Query("SELECT * FROM projects WHERE user_id = :userId")
+    Flux<Project> findAllByUserId(Long userId);
 }
+

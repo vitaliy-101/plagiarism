@@ -8,13 +8,14 @@ import org.mapstruct.Mapper;
 
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {RepositoryProjectMapper.class})
 public interface ProjectMapper {
 
-    @Mapping(target = "userId", source = "user.id")
+    @Mapping(target = "userId", source = "userId")
     ProjectResponse projectResponseFromEntity(Project project);
 
     @Mapping(target = "id", source = "project.id")
@@ -22,4 +23,12 @@ public interface ProjectMapper {
     SmallProjectResponse smallProjectResponseFromEntity(Project project);
 
     List<SmallProjectResponse> listSmallProjectResponseFromEntity(List<Project> projects);
+
+    default Mono<SmallProjectResponse> smallProjectResponseFromMono(Mono<Project> project) {
+        return project.map(this::smallProjectResponseFromEntity);
+    }
+
+    default Mono<List<SmallProjectResponse>> listSmallProjectResponseFromMono(Mono<List<Project>> projects) {
+        return projects.map(this::listSmallProjectResponseFromEntity);
+    }
 }

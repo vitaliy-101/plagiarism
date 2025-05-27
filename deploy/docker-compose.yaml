@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
     ports:
-      - "5433:5432"
+      - "5432:5432"
     networks:
       - network
 
@@ -29,10 +29,14 @@ services:
     working_dir: /app
     command: ["java", "-jar", "/app/plagiarism-app-0.0.1-SNAPSHOT.jar"]
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydatabase
-      SPRING_DATASOURCE_USERNAME: myuser
-      SPRING_DATASOURCE_PASSWORD: mypassword
+      SPRING_R2DBC_URL: r2dbc:postgresql://postgres:5432/mydatabase
+      SPRING_R2DBC_USERNAME: myuser
+      SPRING_R2DBC_PASSWORD: mypassword
       SPRING_FLYWAY_ENABLED: "true"
+      SPRING_FLYWAY_URL: jdbc:postgresql://postgres:5432/mydatabase
+      SPRING_FLYWAY_USER: myuser
+      SPRING_FLYWAY_PASSWORD: mypassword
+
     ports:
       - "8045:8045"
     networks:

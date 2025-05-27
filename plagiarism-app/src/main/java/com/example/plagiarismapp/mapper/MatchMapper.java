@@ -13,10 +13,10 @@ import java.util.List;
 public interface MatchMapper {
     List<SmallMatchResponse> listSmallMatchResponseFromListMatch(List<Match> matches);
 
-    @Mapping(target = "firstFileId", source = "firstFile.id")
-    @Mapping(target = "secondFileId", source = "secondFile.id")
-    @Mapping(target = "firstFileName", source = "firstFile.filename")
-    @Mapping(target = "secondFileName", source = "secondFile.filename")
+    @Mapping(target = "firstFileId", source = "firstFileId")
+    @Mapping(target = "secondFileId", source = "secondFileId")
+    @Mapping(target = "firstFileName", source = "firstFileName")
+    @Mapping(target = "secondFileName", source = "secondFileName")
     SmallMatchResponse smallMatchResponseFromEntity(Match match);
 
 }

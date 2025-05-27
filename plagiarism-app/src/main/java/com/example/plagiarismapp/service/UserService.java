@@ -5,36 +5,45 @@ import com.example.plagiarismapp.entity.Project;
 import com.example.plagiarismapp.entity.User;
 import com.example.plagiarismapp.exception.NotFoundByIdException;
 import com.example.plagiarismapp.mapper.UserMapper;
+import com.example.plagiarismapp.repository.ProjectRepository;
 import com.example.plagiarismapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+    private final ProjectRepository projectRepository;
 
-    public User createUser(UserRequest request) {
+    public Mono<User> createUser(UserRequest request) {
         var user = userMapper.userFromUserRequest(request);
-
-        userRepository.save(user);
-        return user;
+        log.info("Saving user: {}", user);
+        return userRepository.save(user);
     }
 
-    public void deleteUser(Long userId) {
-        var user = userRepository.findById(userId).orElseThrow(
-                () -> new NotFoundByIdException(User.class, userId));
-        userRepository.delete(user);
+    public Mono<Void> deleteUser(Long userId) {
+        return userRepository.findById(userId)
+                .switchIfEmpty(Mono.error(new NotFoundByIdException(User.class, userId)))
+                .flatMap(userRepository::delete);
     }
 
-    public List<Project> getAllProject(Long userId) {
-        var user = userRepository.findById(userId).orElseThrow(
-                () -> new NotFoundByIdException(User.class, userId));
-
-        return user.getProjects();
+    public Mono<List<Project>> getAllProjects(Long userId) {
+        return userRepository.existsById(userId)
+                .flatMap(exists -> {
+                    if (!exists) {
+                        return Mono.error(new NotFoundByIdException(User.class, userId));
+                    }
+                    return projectRepository.findAllByUserId(userId)
+                            .collectList()
+                            .flatMap(Mono::just);
+                });
     }
 
 }

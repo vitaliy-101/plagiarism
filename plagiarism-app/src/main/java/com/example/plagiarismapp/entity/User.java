@@ -1,15 +1,17 @@
 package com.example.plagiarismapp.entity;
 
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.List;
 
-@Entity
+
 @Table(name = "users")
 @Getter
 @Setter
@@ -17,19 +19,15 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column("name")
     private String name;
 
-    @Column(name = "email")
+    @Column("email")
     private String email;
 
-    @Column(name = "password")
+    @Column("password")
     private String password;
-
-    @OneToMany(mappedBy = "user")
-    private List<Project> projects;
 
 }

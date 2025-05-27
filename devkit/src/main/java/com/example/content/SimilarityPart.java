@@ -18,4 +18,10 @@ public class SimilarityPart {
     private int contextLength;
     private String similarFragmentInFirstFile;
     private String similarFragmentInSecondFile;
+
+    private String contextBeforeInFirstFile;
+    private String contextAfterInFirstFile;
+
+    private String contextBeforeInSecondFile;
+    private String contextAfterInSecondFile;
 }

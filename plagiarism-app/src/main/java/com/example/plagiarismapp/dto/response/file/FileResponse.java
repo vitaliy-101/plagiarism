@@ -13,7 +13,6 @@ import lombok.Setter;
 public class FileResponse {
     private Long id;
     private Long repositoryId;
-    private Long projectId;
     private String fullFilename;
     private String filename;
     private String content;

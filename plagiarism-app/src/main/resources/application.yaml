@@ -1,20 +1,29 @@
 spring:
   application:
     name: plagiarism-app
-  datasource:
-    url: jdbc:postgresql://127.0.0.1:5433/plag
-    driver-class-name: org.postgresql.Driver
+  r2dbc:
+    url: r2dbc:postgresql://127.0.0.1:5432/plag
     username: postgres
-    password: 007787898
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    database: postgresql
-    hibernate:
-      ddl-auto: validate
+    password: 280305
   flyway:
     enabled: true
+    url: jdbc:postgresql://127.0.0.1:5432/plag
+    user: postgres
+    password: 280305
     locations: classpath:db/migration
-
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
 
 server:
   port: 8045
+
+logging:
+  level:
+    org.springdoc: DEBUG
+    org.springdoc.api: DEBUG
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

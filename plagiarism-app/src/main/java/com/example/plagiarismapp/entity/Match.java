@@ -1,15 +1,17 @@
 package com.example.plagiarismapp.entity;
 
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.*;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.List;
 
-@Entity
+
 @Table(name = "matches")
 @Getter
 @Setter
@@ -18,33 +20,32 @@ import java.util.List;
 public class Match {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "percentage")
+    @Column("percentage")
     private Double percentage;
 
-    @OneToMany(mappedBy = "match")
-    private List<Tile> tiles;
 
-    @ManyToOne
-    @JoinColumn(name = "first_file_id")
-    private FileProject firstFile;
+    @Column("first_file_id")
+    private Long firstFileId;
 
-    @ManyToOne
-    @JoinColumn(name = "second_file_id")
-    private FileProject secondFile;
+    @Column("first_file_name")
+    private String firstFileName;
 
-    @ManyToOne
-    @JoinColumn(name = "first_repository_id")
-    private RepositoryProject firstRepository;
+    @Column("second_file_id")
+    private Long secondFileId;
 
-    @ManyToOne
-    @JoinColumn(name = "second_repository_id")
-    private RepositoryProject secondRepository;
+    @Column("second_file_name")
+    private String secondFileName;
 
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
+    @Column("first_repository_id")
+    private Long firstRepositoryId;
+
+
+    @Column("second_repository_id")
+    private Long secondRepositoryId;
+
+    @Column("project_id")
+    private Long projectId;
 
 }

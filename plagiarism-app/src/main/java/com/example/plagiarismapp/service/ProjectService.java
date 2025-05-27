@@ -7,7 +7,6 @@ import com.example.plagiarismapp.entity.*;
 import com.example.plagiarismapp.entity.status.ProjectStatus;
 import com.example.plagiarismapp.exception.NotFoundByIdException;
 import com.example.plagiarismapp.exception.NotFoundResourceByIdException;
-import com.example.plagiarismapp.exception.ProcessGitEcxeption;
 import com.example.plagiarismapp.repository.*;
 import lombok.RequiredArgsConstructor;
 
@@ -15,16 +14,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.service.CoreServiceReactive;
 import org.springframework.stereotype.Service;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class ProjectService {
     private final GitService gitService;
     private final CoreServiceReactive coreServiceReactive;
@@ -37,262 +36,305 @@ public class ProjectService {
     private final TileRepository tileRepository;
 
 
+    public Mono<Project> downloadProject(ProjectCreateRequest request) {
+        return userRepository.findById(request.getUserId())
+                .switchIfEmpty(Mono.error(new NotFoundByIdException(User.class, request.getUserId())))
+                .flatMap(user -> {
+                    List<Mono<RepositoryContent>> contentMonos = request.getRepositoryUrls().stream()
+                            .map(url -> gitService.downloadRepository(url, request.getLanguage()))
+                            .collect(Collectors.toList());
 
-    public Project downloadProject(ProjectCreateRequest request) {
-        var user = userRepository.findById(request.getUserId()).orElseThrow(
-                () -> new NotFoundByIdException(User.class, request.getUserId()));
 
-        List<RepositoryContent> contents = new ArrayList<>();
-        for (String url : request.getRepositoryUrls()) {
-            try {
-                contents.add(gitService.downloadRepository(url, request.getLanguage()));
-            }
-            catch (Exception e) {
-                throw new ProcessGitEcxeption(e.getMessage());
-            }
-        }
+                    return Flux.concat(contentMonos)
+                            .flatMap(this::computeRepository)
+                            .collectList()
+                            .flatMap(repositories -> {
+                                Project project = new Project();
+                                project.setName(request.getName());
+                                project.setUserId(user.getId());
+                                project.setStatus(ProjectStatus.NOT_ANALYZED);
+                                return projectRepository.save(project)
+                                        .flatMap(savedProject -> {
+                                            List<Mono<RepositoryProject>> saveOperations = repositories.stream()
+                                                    .peek(repo -> repo.setProjectId(savedProject.getId()))
+                                                    .map(repositoryProjectRepository::save)
+                                                    .collect(Collectors.toList());
 
-        Project project = new Project();
 
-        List<RepositoryProject> repositories = new ArrayList<>();
-
-        for (RepositoryContent content : contents) {
-            repositories.add(computeRepository(content));
-        }
-
-        repositories.forEach(x -> x.setProject(project));
-
-        project.setRepositories(repositories);
-        project.setName(request.getName());
-        project.setUser(user);
-        project.setStatus(ProjectStatus.NOT_ANALYZED);
-
-        projectRepository.save(project);
-
-        repositoryProjectRepository.saveAll(repositories);
-
-        return project;
-    }
-
-    public Project getProject(Long userId, Long projectId) {
-        var project = projectRepository.findById(projectId).orElseThrow(
-                () -> new NotFoundByIdException(Project.class, projectId));
-
-        if (!project.getUser().getId().equals(userId)) {
-            throw new NotFoundResourceByIdException(User.class, userId, Project.class, projectId);
-        }
-
-        return project;
+                                            return Flux.merge(saveOperations)
+                                                    .then(compareRepositories(savedProject.getId()))
+                                                    .then(projectRepository.findById(savedProject.getId()));
+                                        });
+                            });
+                });
     }
 
 
-    public Statistic compareRepositories(Long projectId) {
+    public Mono<Project> getProject(Long userId, Long projectId) {
+        return projectRepository.findById(projectId)
+                .switchIfEmpty(Mono.error(new NotFoundByIdException(Project.class, projectId)))
+                .flatMap(project -> {
+                    if (!project.getUserId().equals(userId)) {
+                        return Mono.error(
+                                new NotFoundResourceByIdException(User.class, userId, Project.class, projectId));
+                    }
+                    return Mono.just(project);
+                });
+    }
 
-        var project = projectRepository.findById(projectId).orElseThrow(
-                () -> new NotFoundByIdException(Project.class, projectId));
+    public Mono<Statistic> compareRepositories(Long projectId) {
+        return projectRepository.findById(projectId)
+                .switchIfEmpty(Mono.error(new NotFoundByIdException(Project.class, projectId)))
+                .flatMap(project -> {
+                    if (project.getStatus().equals(ProjectStatus.ANALYZED)) {
+                        return statisticRepository.findByProjectId(projectId);
+                    }
 
-        if (project.getStatus().equals(ProjectStatus.ANALYZED)) {
-            return project.getStatistic();
-        }
+                    return repositoryProjectRepository.findByProjectId(projectId)
+                            .collectList()
+                            .flatMap(repos -> {
+                                List<Mono<CompareTwoRepositoryDto>> comparisons = new ArrayList<>();
 
-        List<RepositoryProject> repositoryProjects = project.getRepositories();
+                                // Для каждой пары репозиториев
+                                for (int i = 0; i < repos.size() - 1; i++) {
+                                    for (int j = i + 1; j < repos.size(); j++) {
+                                        RepositoryProject repo1 = repos.get(i);
+                                        RepositoryProject repo2 = repos.get(j);
 
-        List<CompareTwoRepositoryDto> allCompare = new ArrayList<>();
-        for (int i = 0; i < repositoryProjects.size() - 1; i++) {
-            for (int j = i + 1; j < repositoryProjects.size(); j++) {
-                List<FileContentUtil> files = repositoryProjects.get(i).getFiles().stream()
-                        .map(x -> {
-                            FileContentUtil fileContent = new FileContentUtil();
-                            fileContent.setId(x.getId());
-                            fileContent.setContent(x.getContent());
-                            return fileContent;
-                        })
-                        .collect(Collectors.toList());
+                                        Mono<List<FileProject>> files1 = fileRepository.findByRepositoryId(repo1.getId())
+                                                .collectList();
 
-                List<FileContentUtil> files2 = repositoryProjects.get(j).getFiles().stream()
-                        .map(x -> {
-                            FileContentUtil fileContent = new FileContentUtil();
-                            fileContent.setId(x.getId());
-                            fileContent.setContent(x.getContent());
-                            return fileContent;
-                        })
-                        .collect(Collectors.toList());
+                                        Mono<List<FileProject>> files2 = fileRepository.findByRepositoryId(repo2.getId())
+                                                .collectList();
 
-                RepositoryContentUtil repositoryContent1 = new RepositoryContentUtil();
-                repositoryContent1.setId(repositoryProjects.get(i).getId());
-                repositoryContent1.setFiles(files);
-                repositoryContent1.setLanguage(repositoryProjects.get(i).getLanguage());
-                RepositoryContentUtil repositoryContent2 = new RepositoryContentUtil();
-                repositoryContent2.setId(repositoryProjects.get(j).getId());
-                repositoryContent2.setFiles(files2);
-                repositoryContent2.setLanguage(repositoryProjects.get(j).getLanguage());
-                Mono<CompareTwoRepositoryDto> compareResult =
-                        coreServiceReactive.compareRepositoriesReactive(repositoryContent1, repositoryContent2);
+                                        Mono<CompareTwoRepositoryDto> comparison = Mono.zip(files1, files2)
+                                                .flatMap(tuple -> {
+                                                    List<FileProject> filesRepo1 = tuple.getT1();
+                                                    List<FileProject> filesRepo2 = tuple.getT2();
 
+                                                    RepositoryContentUtil r1 = new RepositoryContentUtil();
+                                                    r1.setId(repo1.getId());
+                                                    r1.setLanguage(Language.valueOf(repo1.getLanguage()));
+                                                    r1.setFiles(filesRepo1.stream()
+                                                            .map(f -> new FileContentUtil(f.getId(), f.getFullFilename(), f.getFilename(), f.getContent()))
+                                                            .collect(Collectors.toList()));
 
-                allCompare.add(compareResult.block());
-            }
+                                                    RepositoryContentUtil r2 = new RepositoryContentUtil();
+                                                    r2.setId(repo2.getId());
+                                                    r2.setLanguage(Language.valueOf(repo2.getLanguage()));
+                                                    r2.setFiles(filesRepo2.stream()
+                                                            .map(f -> new FileContentUtil(f.getId(), f.getFullFilename(), f.getFilename(), f.getContent()))
+                                                            .collect(Collectors.toList()));
 
-        }
+                                                    return coreServiceReactive.compareRepositoriesReactive(r1, r2);
+                                                });
 
-        allCompare.forEach(x -> x.getCompareFiles().forEach(y -> {
-            Match match = new Match();
-            System.out.println(y.getIdFirstFile() + " " + y.getIdSecondFile() + " " + y.getSimilarity());
-            var fileFirst = fileRepository.findById(y.getIdFirstFile()).orElseThrow(
-                    () -> new NotFoundByIdException(FileProject.class, y.getIdFirstFile()));
-            var fileSecond = fileRepository.findById(y.getIdSecondFile()).orElseThrow(
-                    () -> new NotFoundByIdException(FileProject.class, y.getIdSecondFile()));
+                                        comparisons.add(comparison);
+                                    }
+                                }
 
-            match.setFirstFile(fileFirst);
-            match.setSecondFile(fileSecond);
-            match.setPercentage(y.getSimilarity());
+                                return Flux.merge(comparisons).collectList();
+                            })
+                            .flatMap(allCompare -> Flux.fromIterable(allCompare)
+                                    .flatMap(dto -> Flux.fromIterable(dto.getCompareFiles()))
+                                    .flatMap(fileDto -> {
+                                        Mono<FileProject> file1Mono = fileRepository.findById(fileDto.getIdFirstFile())
+                                                .switchIfEmpty(Mono.error(
+                                                        new NotFoundByIdException(FileProject.class, fileDto.getIdFirstFile())));
 
-            match.setFirstRepository(fileFirst.getRepository());
-            match.setSecondRepository(fileSecond.getRepository());
-            match.setProject(project);
+                                        Mono<FileProject> file2Mono = fileRepository.findById(fileDto.getIdSecondFile())
+                                                .switchIfEmpty(Mono.error(
+                                                        new NotFoundByIdException(FileProject.class, fileDto.getIdSecondFile())));
 
-            List<Tile> tiles = new ArrayList<>();
-            y.getSimilarityParts().forEach(z -> {
-                Tile tile = new Tile();
-                tile.setMatch(match);
-                tile.setStartLineInFirstFile((long) z.getStartLineInFirstFile());
-                tile.setStartLineInSecondFile((long) z.getStartLineInSecondFile());
-                tile.setEndLineInFirstFile((long) z.getEndLineInFirstFile());
-                tile.setEndLineInSecondFile((long)z.getEndLineInSecondFile());
-                tile.setTextInFirstFile(z.getSimilarFragmentInFirstFile());
-                tile.setTextInSecondFile(z.getSimilarFragmentInSecondFile());
-                tiles.add(tile);
-            });
+                                        return Mono.zip(file1Mono, file2Mono)
+                                                .flatMap(tuple -> {
+                                                    FileProject file1 = tuple.getT1();
+                                                    FileProject file2 = tuple.getT2();
 
-            match.setTiles(tiles);
-            matchRepository.save(match);
+                                                    Match match = new Match();
+                                                    match.setFirstFileId(file1.getId());
+                                                    match.setFirstFileName(file1.getFilename());
+                                                    match.setSecondFileId(file2.getId());
+                                                    match.setSecondFileName(file2.getFilename());
+                                                    match.setPercentage(Math.round(fileDto.getSimilarity() * 100.0) / 100.0);
+                                                    match.setFirstRepositoryId(file1.getRepositoryId());
+                                                    match.setSecondRepositoryId(file2.getRepositoryId());
+                                                    match.setProjectId(project.getId());
 
-            tileRepository.saveAll(tiles);
+                                                    return matchRepository.save(match)
+                                                            .flatMap(savedMatch -> {
+                                                                List<Mono<Tile>> tileSaves = fileDto.getSimilarityParts().stream()
+                                                                        .map(part -> {
+                                                                            Tile tile = new Tile();
+                                                                            tile.setMatchId(savedMatch.getId());
+                                                                            tile.setStartLineInFirstFile((long) part.getStartLineInFirstFile());
+                                                                            tile.setStartLineInSecondFile((long) part.getStartLineInSecondFile());
+                                                                            tile.setEndLineInFirstFile((long) part.getEndLineInFirstFile());
+                                                                            tile.setEndLineInSecondFile((long) part.getEndLineInSecondFile());
+                                                                            tile.setTextInFirstFile(part.getSimilarFragmentInFirstFile());
+                                                                            tile.setTextAfterContextInFirstFile(part.getContextAfterInFirstFile());
+                                                                            tile.setTextBeforeContextInFirstFile(part.getContextBeforeInFirstFile());
+                                                                            tile.setTextInSecondFile(part.getSimilarFragmentInSecondFile());
+                                                                            tile.setTextAfterContextInSecondFile(part.getContextAfterInSecondFile());
+                                                                            tile.setTextBeforeContextInSecondFile(part.getContextBeforeInSecondFile());
+                                                                            return tileRepository.save(tile);
+                                                                        })
+                                                                        .collect(Collectors.toList());
 
-        }));
+                                                                return Flux.merge(tileSaves).then(Mono.just(savedMatch));
+                                                            });
+                                                });
+                                    })
+                                    .then(Mono.defer(() -> repositoryProjectRepository.findByProjectId(projectId).collectList()
+                                            .flatMap(repos -> fileRepository.countByProjectId(projectId)
+                                                    .flatMap(fileCount -> {
+                                                        // Calculate statistics
+                                                        List<Double> similarities = allCompare.stream()
+                                                                .flatMap(x -> x.getCompareFiles().stream())
+                                                                .map(CompareTwoFilesDto::getSimilarity)
+                                                                .collect(Collectors.toList());
 
-        Statistic statistic = new Statistic();
-        statistic.setNumberOfRepositories((long)project.getRepositories().size());
-        statistic.setNumberOfFiles(project.getRepositories().stream().mapToLong(x -> x.getFiles().size()).sum());
+                                                        DoubleSummaryStatistics stats = similarities.stream()
+                                                                .mapToDouble(Double::doubleValue)
+                                                                .summaryStatistics();
 
-        statistic.setAverageSimilarity(
-                allCompare.stream().flatMap(x -> x.getCompareFiles().stream())
-                                .mapToDouble(CompareTwoFilesDto::getSimilarity)
-                                        .average().orElse(0.0));
+                                                        long suspiciousFiles = similarities.stream()
+                                                                .filter(sim -> sim >= 0.4)
+                                                                .count();
 
-        statistic.setMaxSimilarity(
-                allCompare.stream()
-                                .flatMap(x -> x.getCompareFiles().stream())
-                                        .map(CompareTwoFilesDto::getSimilarity)
-                                                .max(Double::compare).orElse(0.0));
+                                                        // Create and configure statistic
+                                                        Statistic statistic = new Statistic();
+                                                        statistic.setNumberOfRepositories((long) repos.size());
+                                                        statistic.setNumberOfFiles(fileCount);
+                                                        statistic.setAverageSimilarity(Math.round(stats.getAverage() * 100.0) / 100.0);
+                                                        statistic.setMaxSimilarity(stats.getMax());
+                                                        statistic.setNumberOfSuspiciousFiles(suspiciousFiles);
+                                                        statistic.setProjectId(project.getId());
 
-        statistic.setNumberOfSuspiciousFiles(
-                allCompare.stream().mapToLong(
-                        x ->
-                                x.getCompareFiles()
-                                        .stream()
-                                        .filter(y -> y.getSimilarity() >= 0.8)
-                                        .count())
-                        .sum()
-        );
+                                                        // Update project
+                                                        project.setStatus(ProjectStatus.ANALYZED);
 
-        statistic.setProject(project);
-
-        project.setStatus(ProjectStatus.ANALYZED);
-
-        projectRepository.save(project);
-
-        statisticRepository.save(statistic);
-
-        return statistic;
-
+                                                        return projectRepository.save(project)
+                                                                .then(statisticRepository.save(statistic))
+                                                                .thenReturn(statistic);
+                                                    })))));
+                });
     }
 
 
-    public List<RepositoryProject> getAllRepositories(Long userId, Long projectId) {
-        var project = projectRepository.findById(projectId).orElseThrow(
-                () -> new NotFoundByIdException(Project.class, projectId));
-        if (!project.getUser().getId().equals(userId)) {
-            throw new NotFoundResourceByIdException(User.class, userId, Project.class, projectId);
-        }
-
-        return project.getRepositories();
+    public Mono<List<RepositoryProject>> getAllRepositories(Long userId, Long projectId) {
+        return projectRepository.findById(projectId)
+                .switchIfEmpty(Mono.error(new NotFoundByIdException(Project.class, projectId)))
+                .flatMap(project -> {
+                    if (!project.getUserId().equals(userId)) {
+                        return Mono.error(new NotFoundResourceByIdException(
+                                User.class, userId,
+                                Project.class, projectId
+                        ));
+                    }
+                    return repositoryProjectRepository.findByProjectId(projectId)
+                            .collectList();
+                });
     }
 
 
-    public void deleteProject(Long userId,Long projectId) {
-        var project = checkProjectForExist(projectId);
-        if (!project.getUser().getId().equals(userId)) {
-            throw new NotFoundResourceByIdException(User.class, userId, Project.class, projectId);
-        }
-
-        projectRepository.delete(project);
+    public Mono<Void> deleteProject(Long userId, Long projectId) {
+        return projectRepository.findById(projectId)
+                .switchIfEmpty(Mono.error(new NotFoundByIdException(Project.class, projectId)))
+                .flatMap(project -> {
+                    if (!project.getUserId().equals(userId)) {
+                        return Mono.error(
+                                new NotFoundResourceByIdException(User.class, userId, Project.class, projectId));
+                    }
+                    return projectRepository.delete(project);
+                });
     }
 
-    private RepositoryProject computeRepository(RepositoryContent content) {
+
+    private Mono<RepositoryProject> computeRepository(RepositoryContent content) {
         RepositoryProject repositoryProject = new RepositoryProject();
         repositoryProject.setUrl(content.getRepositoryUrl());
         repositoryProject.setName(content.getRepositoryName());
-        repositoryProject.setLanguage(content.getLanguage());
+        repositoryProject.setLanguage(content.getLanguage().toString());
         repositoryProject.setOwner(content.getOwner());
-        repositoryProject.setFiles(computeFile(content.getFiles()));
 
-        repositoryProject.getFiles().forEach(x -> x.setRepository(repositoryProject));
-
-        repositoryProjectRepository.save(repositoryProject);
-
-        fileRepository.saveAll(repositoryProject.getFiles());
-
-        return repositoryProject;
-    }
-
-    private List<FileProject> computeFile(List<FileContent> fileContents) {
-        return fileContents.stream().map(x -> {
-            FileProject fileProject = new FileProject();
-            fileProject.setFullFilename(x.getFullFilename());
-            fileProject.setFilename(x.getFilename());
-            fileProject.setContent(x.getContent());
-            return fileProject;
-        }).collect(toList());
-
-    }
-
-    private Project checkProjectForExist(Long projectId) {
-        return projectRepository.findById(projectId).orElseThrow(
-                () -> new NotFoundByIdException(Project.class, projectId));
-    }
-
-    public List<RepositoryMatchResponse> getAllMatchRepository(Long userId, Long projectId) {
-        var project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new NotFoundByIdException(Project.class, projectId));
-
-        if (!project.getUser().getId().equals(userId)) {
-            throw new NotFoundResourceByIdException(User.class, userId, Project.class, projectId);
-        }
-
-        return matchRepository.findAllByProjectId(projectId)
-                .stream()
-                .collect(Collectors.groupingBy(
-                        match -> {
-                            Long id1 = match.getFirstRepository().getId();
-                            Long id2 = match.getSecondRepository().getId();
-                            return id1 < id2 ? id1 + "-" + id2 : id2 + "-" + id1;
-                        },
-                        Collectors.maxBy(Comparator.comparingDouble(Match::getPercentage))
-                ))
-                .values()
-                .stream()
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .map(match -> {
-                    RepositoryMatchResponse response = new RepositoryMatchResponse();
-                    response.setFirstRepositoryId(match.getFirstRepository().getId());
-                    response.setFirstRepositoryOwner(match.getFirstRepository().getOwner());
-                    response.setSecondRepositoryId(match.getSecondRepository().getId());
-                    response.setSecondRepositoryOwner(match.getSecondRepository().getOwner());
-                    response.setPercentage(match.getPercentage());
-                    return response;
+        List<FileProject> files = content.getFiles().stream()
+                .map(fileContent -> {
+                    FileProject file = new FileProject();
+                    file.setContent(fileContent.getContent());
+                    file.setFilename(fileContent.getFilename());
+                    file.setFullFilename(fileContent.getFullFilename());
+                    return file;
                 })
-                .collect(Collectors.toList());
+                .toList();
+
+        return repositoryProjectRepository.save(repositoryProject)
+                .flatMap(savedRepo -> Flux.fromIterable(files)
+                        .doOnNext(file -> file.setRepositoryId(savedRepo.getId()))
+                        .flatMap(fileRepository::save)
+                        .collectList()
+                        .thenReturn(savedRepo));
+    }
+
+
+    public Mono<List<RepositoryMatchResponse>> getAllMatchRepository(Long userId, Long projectId) {
+        return projectRepository.findById(projectId)
+                .switchIfEmpty(Mono.error(new NotFoundByIdException(Project.class, projectId)))
+                .flatMap(project -> {
+                    if (!project.getUserId().equals(userId)) {
+                        return Mono.error(
+                                new NotFoundResourceByIdException(User.class, userId, Project.class, projectId));
+                    }
+
+                    return matchRepository.findAllByProjectId(projectId)
+                            .collectList()
+                            .flatMap(matches -> {
+                                Map<String, Match> groupedMatches = matches.stream()
+                                        .collect(Collectors.groupingBy(
+                                                match -> {
+                                                    Long id1 = match.getFirstRepositoryId();
+                                                    Long id2 = match.getSecondRepositoryId();
+                                                    return id1 < id2 ? id1 + "-" + id2 : id2 + "-" + id1;
+                                                },
+                                                Collectors.maxBy(Comparator.comparingDouble(Match::getPercentage))
+                                        ))
+                                        .values()
+                                        .stream()
+                                        .filter(Optional::isPresent)
+                                        .map(Optional::get)
+                                        .collect(Collectors.toMap(
+                                                match -> match.getFirstRepositoryId() + "-" + match.getSecondRepositoryId(),
+                                                match -> match
+                                        ));
+
+
+                                return Flux.fromIterable(groupedMatches.values())
+                                        .flatMap(match -> {
+                                            RepositoryMatchResponse response = new RepositoryMatchResponse();
+                                            response.setFirstRepositoryId(match.getFirstRepositoryId());
+                                            response.setSecondRepositoryId(match.getSecondRepositoryId());
+                                            response.setPercentage(match.getPercentage());
+
+                                            Mono<String> firstOwner =
+                                                    repositoryProjectRepository.findById(match.getFirstRepositoryId())
+                                                    .map(RepositoryProject::getOwner)
+                                                    .defaultIfEmpty("Unknown");
+
+                                            Mono<String> secondOwner =
+                                                    repositoryProjectRepository.findById(match.getSecondRepositoryId())
+                                                    .map(RepositoryProject::getOwner)
+                                                    .defaultIfEmpty("Unknown");
+
+
+                                            return Mono.zip(firstOwner, secondOwner)
+                                                    .map(tuple -> {
+                                                        response.setFirstRepositoryOwner(tuple.getT1());
+                                                        response.setSecondRepositoryOwner(tuple.getT2());
+                                                        return response;
+                                                    });
+                                        })
+                                        .collectList();
+                            });
+                });
     }
 }

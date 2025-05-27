@@ -11,10 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TileResponse {
-    private Long startLineInFirstFile;
-    private Long endLineInFirstFile;
-    private Long startLineInSecondFile;
-    private Long endLineInSecondFile;
     private String textInFirstFile;
+    private String textAfterInFirstFile;
+    private String textBeforeInFirstFile;
     private String textInSecondFile;
+    private String textAfterInSecondFile;
+    private String textBeforeInSecondFile;
 }

@@ -81,23 +81,31 @@ public class CoreServiceReactive {
                         result.setSimilarityParts(res.getTiles().stream().map(t -> {
                             SimilarityPart part = new SimilarityPart();
 
-                            part.setStartLineInFirstFile(tokens1.get(t.patternPostion).getLine());
-                            part.setStartColumnInFirstFile(tokens1.get(t.patternPostion).getColumn());
-                            part.setEndLineInFirstFile(tokens1.get(t.patternPostion + t.length - 1).getLine());
-                            part.setEndColumnInFirstFile(tokens1.get(t.patternPostion + t.length - 1).getColumn()
-                                    + tokens1.get(t.patternPostion + t.length - 1).getLength() - 1);
+                            int startLineInFirstFile = tokens1.get(t.patternPostion).getLine();
+                            int startColumnInFirstFile = tokens1.get(t.patternPostion).getColumn();
+                            int endLineInFirstFile = tokens1.get(t.patternPostion + t.length - 1).getLine();
+                            int endColumnInFirstFile = tokens1.get(t.patternPostion + t.length - 1).getColumn() +
+                                    tokens1.get(t.patternPostion + t.length - 1).getLength() - 1;
 
-                            part.setStartLineInSecondFile(tokens2.get(t.textPosition).getLine());
-                            part.setStartColumnInSecondFile(tokens2.get(t.textPosition).getColumn());
-                            part.setEndLineInSecondFile(tokens2.get(t.textPosition + t.length - 1).getLine());
-                            part.setEndColumnInSecondFile(tokens2.get(t.textPosition + t.length - 1).getColumn()
-                                    + tokens2.get(t.textPosition + t.length - 1).getLength() - 1);
+                            int startLineInSecondFile = tokens2.get(t.textPosition).getLine();
+                            int startColumnInSecondFile = tokens2.get(t.textPosition).getColumn();
+                            int endLineInSecondFile = tokens2.get(t.textPosition + t.length - 1).getLine();
+                            int endColumnInSecondFile = tokens2.get(t.textPosition + t.length - 1).getColumn() +
+                                    tokens2.get(t.textPosition + t.length - 1).getLength() - 1;
 
-                            part.setContextLength(2);
-                            part.setSimilarFragmentInFirstFile(getSimilarFragmentString(file1, part.getStartLineInFirstFile(),
-                                    part.getEndLineInFirstFile(), part.getContextLength()));
-                            part.setSimilarFragmentInSecondFile(getSimilarFragmentString(file2, part.getStartLineInSecondFile(),
-                                    part.getEndLineInSecondFile(), part.getContextLength()));
+                            int contextLength = 2;
+
+                            List<String> similarFragFirst = getSimilarFragmentString(file1, startLineInFirstFile, startColumnInFirstFile,
+                                    endLineInFirstFile, endColumnInFirstFile, contextLength);
+                            List<String> similarFragSecond = getSimilarFragmentString(file2, startLineInSecondFile, startColumnInSecondFile,
+                                    endLineInSecondFile, endColumnInSecondFile, contextLength);
+
+                            part.setContextBeforeInFirstFile(similarFragFirst.get(1));
+                            part.setContextAfterInFirstFile(similarFragFirst.get(2));
+                            part.setContextBeforeInSecondFile(similarFragSecond.get(1));
+                            part.setContextAfterInSecondFile(similarFragSecond.get(2));
+                            part.setSimilarFragmentInFirstFile(similarFragFirst.getFirst());
+                            part.setSimilarFragmentInSecondFile(similarFragSecond.getFirst());
                             return part;
                         }).toList());
 
@@ -116,18 +124,69 @@ public class CoreServiceReactive {
         return tokenNames;
     }
 
-    private String getSimilarFragmentString(FileContentUtil file, int startLine,
-                                            int endLine, int contextLength) {
-        StringBuilder result = new StringBuilder();
+    private List<String> getSimilarFragmentString(FileContentUtil file, int startLine, int startColumn,
+                                              int endLine, int endColumn, int contextLength) {
         String[] fileContent = file.getContent().split("\n");
-        startLine = Math.max(startLine - contextLength, 0);
-        endLine = Math.min(endLine + contextLength, fileContent.length - 1);
 
-        for (int line = startLine; line <= endLine; line++) {
-            result.append(fileContent[line]);
-            result.append("\n");
+        StringBuilder contextBefore = new StringBuilder();
+        StringBuilder contextAfter = new StringBuilder();
+        int startContextLine = Math.max(startLine - contextLength, 0);
+        int endContextLine = Math.min(endLine + contextLength, fileContent.length - 1);
+
+        for (int i = startContextLine; i <= startLine; i++)
+        {
+            if (i == startLine)
+            {
+                contextBefore.append(fileContent[i], 0, startColumn);
+            }
+            else
+            {
+                contextBefore.append(fileContent[i]);
+                contextBefore.append("\n");
+            }
         }
 
-        return result.toString();
+        for (int i = endLine; i <= endContextLine; i++)
+        {
+            if (i == endLine)
+            {
+                contextAfter.append(fileContent[i], Math.min(endColumn + 1, fileContent[i].length()),
+                        fileContent[i].length());
+                if (fileContent[i].length() > endColumn + 1)
+                    contextAfter.append("\n");
+            }
+            else
+            {
+                contextAfter.append(fileContent[i]);
+                contextAfter.append("\n");
+            }
+        }
+
+        StringBuilder plagiarism = new StringBuilder();
+
+        for (int line = 0; line < fileContent.length; line++) {
+            if (line >= startLine && line <= endLine) {
+                if (startLine == endLine){
+                    plagiarism.append(fileContent[line], startColumn, Math.min(endColumn + 1, fileContent[line].length()));
+                    if (fileContent[line].length() <= endColumn + 1)
+                        plagiarism.append("\n");
+                }
+                else if (line == startLine) {
+                    plagiarism.append(fileContent[line], startColumn, fileContent[line].length());
+                    plagiarism.append("\n");
+                }
+                else if (line == endLine) {
+                    plagiarism.append(fileContent[line], 0, Math.min(endColumn + 1, fileContent[line].length()));
+                    if (fileContent[line].length() <= endColumn + 1)
+                        plagiarism.append("\n");
+                }
+                else {
+                    plagiarism.append(fileContent[line]);
+                    plagiarism.append("\n");
+                }
+            }
+        }
+        return List.of(plagiarism.toString(), contextBefore.toString(), contextAfter.toString());
     }
+
 }

@@ -1,12 +1,15 @@
 package com.example.plagiarismapp.entity;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
+
 @Table(name = "statistics")
 @Getter
 @Setter
@@ -14,22 +17,20 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Statistic {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "number_of_repositories")
+    @Column("number_of_repositories")
     private Long numberOfRepositories;
-    @Column(name = "number_of_files")
+    @Column("number_of_files")
     private Long numberOfFiles;
-    @Column(name = "number_of_suspicious_files")
+    @Column("number_of_suspicious_files")
     private Long numberOfSuspiciousFiles;
-    @Column(name = "max_similarity")
+    @Column("max_similarity")
     private Double maxSimilarity;
-    @Column(name = "average_similarity")
+    @Column("average_similarity")
     private Double averageSimilarity;
 
-    @OneToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
+    @Column("project_id")
+    private Long projectId;
 
 }

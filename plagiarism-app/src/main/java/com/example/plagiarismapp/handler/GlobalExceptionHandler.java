@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -26,30 +28,32 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidValueException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ErrorResponse handleInvalidValueException(InvalidValueException ex) {
-        return new ErrorResponse("Invalid value", ex.getMessage());
+    public Mono<ErrorResponse> handleInvalidValueException(InvalidValueException ex) {
+        return Mono.just(new ErrorResponse("Invalid value", ex.getMessage()));
     }
 
     @ExceptionHandler(NotFoundResourceByIdException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ErrorResponse handleNotFoundException(NotFoundResourceByIdException ex) {
-        return new ErrorResponse("Resource not found", ex.getMessage());
+    public Mono<ErrorResponse> handleNotFoundException(NotFoundResourceByIdException ex) {
+        return Mono.just(new ErrorResponse("Resource not found", ex.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public List<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        return ex.getBindingResult().getFieldErrors().stream()
-                .map(error -> new ErrorResponse(error.getField(), error.getDefaultMessage()))
-                .toList();
+    public Flux<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        return Flux.fromStream(
+                ex.getBindingResult().getFieldErrors().stream()
+                        .map(error -> new ErrorResponse(error.getField(), error.getDefaultMessage()))
+        );
+
     }
 
     @ExceptionHandler(ProcessGitEcxeption.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public ErrorResponse handleProcessGitEcxeption(ProcessGitEcxeption ex) {
-        return new ErrorResponse("Git process error", ex.getMessage());
+    public Mono<ErrorResponse> handleProcessGitEcxeption(ProcessGitEcxeption ex) {
+        return Mono.just(new ErrorResponse("Git process error", ex.getMessage()));
     }
 }
