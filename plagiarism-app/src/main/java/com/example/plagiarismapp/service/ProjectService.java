@@ -18,6 +18,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 
+import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,12 @@ public class ProjectService {
                 .switchIfEmpty(Mono.error(new NotFoundByIdException(User.class, request.getUserId())))
                 .flatMap(user -> {
                     List<Mono<RepositoryContent>> contentMonos = request.getRepositoryUrls().stream()
-                            .map(url -> gitService.downloadRepository(url, request.getLanguage()))
+                            .map(url -> gitService.downloadRepository(url, request.getLanguage())
+                                    .timeout(Duration.ofMinutes(15))
+                                    .onErrorResume(e -> {
+                                        log.error("Ошибка при загрузке репозитория {}: {}", url, e.getMessage());
+                                        return Mono.empty();
+                                    }))
                             .collect(Collectors.toList());
 
 
@@ -93,47 +99,57 @@ public class ProjectService {
                     return repositoryProjectRepository.findByProjectId(projectId)
                             .collectList()
                             .flatMap(repos -> {
-                                List<Mono<CompareTwoRepositoryDto>> comparisons = new ArrayList<>();
+                                // Создаем поток пар индексов для сравнения
+                                return Flux.range(0, repos.size() - 1)
+                                        .flatMap(i -> Flux.range(i + 1, repos.size() - i - 1)
+                                                .map(j -> new int[]{i, j}))
+                                        .flatMap(pair -> {
+                                            RepositoryProject repo1 = repos.get(pair[0]);
+                                            RepositoryProject repo2 = repos.get(pair[1]);
 
-                                // Для каждой пары репозиториев
-                                for (int i = 0; i < repos.size() - 1; i++) {
-                                    for (int j = i + 1; j < repos.size(); j++) {
-                                        RepositoryProject repo1 = repos.get(i);
-                                        RepositoryProject repo2 = repos.get(j);
+                                            return Mono.zip(
+                                                            fileRepository.findByRepositoryId(repo1.getId()).collectList(),
+                                                            fileRepository.findByRepositoryId(repo2.getId()).collectList()
+                                                    )
+                                                    .timeout(Duration.ofMinutes(5)) // Таймаут на загрузку файлов
+                                                    .flatMap(tuple -> {
+                                                        List<FileProject> filesRepo1 = tuple.getT1();
+                                                        List<FileProject> filesRepo2 = tuple.getT2();
 
-                                        Mono<List<FileProject>> files1 = fileRepository.findByRepositoryId(repo1.getId())
-                                                .collectList();
+                                                        RepositoryContentUtil r1 = new RepositoryContentUtil();
+                                                        r1.setId(repo1.getId());
+                                                        r1.setLanguage(Language.valueOf(repo1.getLanguage()));
+                                                        r1.setFiles(filesRepo1.stream()
+                                                                .map(f -> new FileContentUtil(f.getId(), f.getFullFilename(), f.getFilename(), f.getContent()))
+                                                                .collect(Collectors.toList()));
 
-                                        Mono<List<FileProject>> files2 = fileRepository.findByRepositoryId(repo2.getId())
-                                                .collectList();
+                                                        RepositoryContentUtil r2 = new RepositoryContentUtil();
+                                                        r2.setId(repo2.getId());
+                                                        r2.setLanguage(Language.valueOf(repo2.getLanguage()));
+                                                        r2.setFiles(filesRepo2.stream()
+                                                                .map(f -> new FileContentUtil(f.getId(), f.getFullFilename(), f.getFilename(), f.getContent()))
+                                                                .collect(Collectors.toList()));
 
-                                        Mono<CompareTwoRepositoryDto> comparison = Mono.zip(files1, files2)
-                                                .flatMap(tuple -> {
-                                                    List<FileProject> filesRepo1 = tuple.getT1();
-                                                    List<FileProject> filesRepo2 = tuple.getT2();
-
-                                                    RepositoryContentUtil r1 = new RepositoryContentUtil();
-                                                    r1.setId(repo1.getId());
-                                                    r1.setLanguage(Language.valueOf(repo1.getLanguage()));
-                                                    r1.setFiles(filesRepo1.stream()
-                                                            .map(f -> new FileContentUtil(f.getId(), f.getFullFilename(), f.getFilename(), f.getContent()))
-                                                            .collect(Collectors.toList()));
-
-                                                    RepositoryContentUtil r2 = new RepositoryContentUtil();
-                                                    r2.setId(repo2.getId());
-                                                    r2.setLanguage(Language.valueOf(repo2.getLanguage()));
-                                                    r2.setFiles(filesRepo2.stream()
-                                                            .map(f -> new FileContentUtil(f.getId(), f.getFullFilename(), f.getFilename(), f.getContent()))
-                                                            .collect(Collectors.toList()));
-
-                                                    return coreServiceReactive.compareRepositoriesReactive(r1, r2);
-                                                });
-
-                                        comparisons.add(comparison);
-                                    }
-                                }
-
-                                return Flux.merge(comparisons).collectList();
+                                                        return coreServiceReactive.compareRepositoriesReactive(r1, r2)
+                                                                .timeout(Duration.ofMinutes(10)) // Таймаут на сравнение
+                                                                .onErrorResume(e -> {
+                                                                    log.error("Ошибка при сравнении репозиториев {} и {}: {}",
+                                                                            repo1.getId(), repo2.getId(), e.getMessage());
+                                                                    return Mono.empty();
+                                                                });
+                                                    })
+                                                    .onErrorResume(e -> {
+                                                        log.error("Таймаут или ошибка при обработке репозиториев {} и {}: {}",
+                                                                repo1.getId(), repo2.getId(), e.getMessage());
+                                                        return Mono.empty();
+                                                    });
+                                        }, 16) // Параллелизм
+                                        .collectList()
+                                        .timeout(Duration.ofMinutes(30)) // Общий таймаут на всю операцию
+                                        .onErrorResume(e -> {
+                                            log.error("Общий таймаут при сравнении репозиториев: {}", e.getMessage());
+                                            return Mono.error(new RuntimeException("Превышено время ожидания обработки репозиториев"));
+                                        });
                             })
                             .flatMap(allCompare -> Flux.fromIterable(allCompare)
                                     .flatMap(dto -> Flux.fromIterable(dto.getCompareFiles()))
@@ -188,7 +204,6 @@ public class ProjectService {
                                     .then(Mono.defer(() -> repositoryProjectRepository.findByProjectId(projectId).collectList()
                                             .flatMap(repos -> fileRepository.countByProjectId(projectId)
                                                     .flatMap(fileCount -> {
-                                                        // Calculate statistics
                                                         List<Double> similarities = allCompare.stream()
                                                                 .flatMap(x -> x.getCompareFiles().stream())
                                                                 .map(CompareTwoFilesDto::getSimilarity)

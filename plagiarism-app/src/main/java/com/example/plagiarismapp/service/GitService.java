@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
 
 import static com.example.plagiarismapp.utils.GitUtils.*;
 
@@ -28,32 +29,47 @@ public class GitService {
     public Mono<RepositoryContent> downloadRepository(String url, Language language) {
         return Mono.fromCallable(() -> Files.createTempDirectory(TEMP_DIR_PREFIX))
                 .flatMap(tempDir -> Mono.fromCallable(() -> {
-                    var git = Git.cloneRepository()
-                            .setURI(url)
-                            .setDirectory(tempDir.toFile())
-                            .call();
-
-                    git.close();
-                    return tempDir;
-                }).flatMap(tempDirResult -> collectFiles(tempDirResult, language)
-                        .collectList()
-                        .map(files -> new RepositoryContent(
-                                url,
-                                extractRepoName(url),
-                                extractRepoOwner(url),
-                                files,
-                                language
-                        ))).doFinally(signalType -> {
-                    try {
-                        FileUtils.deleteDirectory(tempDir.toFile());
-                        log.debug("Deleted temp directory: {}", tempDir);
-                    } catch (IOException e) {
-                        throw new ProcessGitEcxeption(e.getMessage());
-                    }
-                }));
+                            log.info("Начинаем клонирование репозитория: {}", url);
+                            Git git = Git.cloneRepository()
+                                    .setURI(url)
+                                    .setDirectory(tempDir.toFile())
+                                    .setTimeout(300)
+                                    .setCloneAllBranches(false)
+                                    .setDepth(1)
+                                    .call();
+                            git.close();
+                            return tempDir;
+                        })
+                        .timeout(Duration.ofMinutes(10))
+                        .onErrorResume(e -> {
+                            log.error("Ошибка при клонировании репозитория {}: {}", url, e.getMessage());
+                            return Mono.error(new ProcessGitEcxeption(e.getMessage()));
+                        })
+                        .flatMap(tempDirResult -> collectFiles(tempDirResult, language)
+                                .collectList()
+                                .timeout(Duration.ofMinutes(5))
+                                .onErrorResume(e -> {
+                                    log.error("Ошибка при обработке файлов репозитория {}: {}", url, e.getMessage());
+                                    return Mono.error(new ProcessGitEcxeption("Ошибка при обработке файлов репозитория: " + e.getMessage()));
+                                })
+                                .map(files -> new RepositoryContent(
+                                        url,
+                                        extractRepoName(url),
+                                        extractRepoOwner(url),
+                                        files,
+                                        language
+                                )))
+                        .doFinally(signalType -> {
+                            try {
+                                FileUtils.deleteDirectory(tempDir.toFile());
+                                log.debug("Временная директория удалена: {}", tempDir);
+                            } catch (IOException e) {
+                                log.warn("Не удалось удалить временную директорию {}: {}", tempDir, e.getMessage());
+                            }
+                        }));
     }
 
-    private Flux<FileContent> collectFiles(Path rootDir, Language language) {
+    Flux<FileContent> collectFiles(Path rootDir, Language language) {
         return Flux.fromStream(() -> {
             try {
                 return Files.walk(rootDir)
